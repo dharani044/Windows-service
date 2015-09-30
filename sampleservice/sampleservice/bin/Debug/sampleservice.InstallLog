@@ -1,0 +1,588 @@
+﻿Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Creating EventLog source Service1 in log Application...
+Rolling back assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Restoring event log to previous state for source Service1.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Rolling back assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Creating EventLog source Service1 in log Application...
+Rolling back assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Restoring event log to previous state for source Service1.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Rolling back assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Attempt to stop service Service1.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Attempt to stop service Service1.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Attempt to stop service Service1.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Attempt to stop service Service1.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Creating EventLog source Service1 in log Application...
+Rolling back assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Restoring event log to previous state for source Service1.
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Attempt to stop service Service1.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Attempt to stop service Service1.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Attempt to stop service Service1.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Attempt to stop service Service1.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Creating EventLog source Service1 in log Application...
+Rolling back assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Restoring event log to previous state for source Service1.
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Attempt to stop service Service1.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Attempt to stop service Service1.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Attempt to stop service Service1.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Attempt to stop service Service1.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Attempt to stop service Service1.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Attempt to stop service Service1.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Attempt to stop service Service1.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Attempt to stop service Service1.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Attempt to stop service Service1.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Attempt to stop service Service1.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Attempt to stop service Service1.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Uninstalling assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Attempt to stop service Service1.
+Installing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.InstallLog
+   assemblypath = C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe

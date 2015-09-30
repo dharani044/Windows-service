@@ -1,0 +1,1531 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0102)http://www.c-sharpcorner.com/UploadFile/naresh.avari/develop-and-install-a-windows-service-in-C-Sharp/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <title>Develop and Install a Windows Service in C#</title> <meta name="Keywords" content="C#,C# Windows Service,Install a Windows Service in C#,Windows Service in C#"> <meta name="DESCRIPTION" content="This article explains a step-by-step process of developing and installing a Windows Service to do a scheduled job based on a time interval."> <meta name="Search.TopicType" content="kbArticle"> <meta name="Search.PublishDate" content="24 Feb 2014 12:00:00 GMT"> <meta name="Search.RevisedDate" content="11 Mar 2015 03:26:40 GMT"> <meta name="Search.UserRating" content="0%"> <meta name="CODE_LANGUAGE" content="C#"> <meta name="MS.LOCALE" content="en-US">  <meta name="Author" content="Naresh Avari"> <link rel="stylesheet" type="text/css" href="./Develop and Install a Windows Service in C#_files/csharp_articles_20150912.css"><link href="./Develop and Install a Windows Service in C#_files/responsive_20150917.css" rel="stylesheet" type="text/css"><link href="./Develop and Install a Windows Service in C#_files/SyntaxHighlighter.css" rel="stylesheet" type="text/css"><link rel="Shortcut Icon" href="http://cscorner.dotnetheaven.netdna-cdn.com/Images/McnIcon.ico"><meta http-equiv="Page-Exit" content="progid:DXImageTransform.Microsoft.Fade(duration=.3)"><meta property="fb:app_id" content="440531902678919"> <script src="./Develop and Install a Windows Service in C#_files/cb=gapi.loaded_0" async=""></script><script src="./Develop and Install a Windows Service in C#_files/in.js"></script><script src="./Develop and Install a Windows Service in C#_files/widgets.js"></script><script type="text/javascript" async="" src="./Develop and Install a Windows Service in C#_files/client-plusone.js" gapi_processed="true"></script><script id="facebook-jssdk" async="" src="./Develop and Install a Windows Service in C#_files/sdk.js"></script><script type="text/javascript" async="" src="./Develop and Install a Windows Service in C#_files/ga.js"></script><script src="./Develop and Install a Windows Service in C#_files/jquery.TrendingNow_09032014.js"></script><script src="./Develop and Install a Windows Service in C#_files/MindcrackerJScript.js"></script><script src="./Develop and Install a Windows Service in C#_files/jquery.min-20150912.js" type="text/javascript"></script> <script type="text/javascript" language="javascript">
+var $j = jQuery.noConflict();
+$j(document).ready(function () {
+$j(".expand").click(function () {
+$j('#ctl00_LabelMessageBox').text('');
+var thisBtn = $j(this);
+if (!thisBtn.hasClass('hideExpand')) {
+$j(this).addClass("hideExpand");
+$j(".innerArticleIcons").css("height", "36px");
+// var iconSCount = $j(".innerArticleIcons ul li a").length;
+var iconSCount = $j(".innerArticleIcons ul li a:visible").length;
+var innerArticlesWidth = iconSCount * 42;
+$j(".innerArticleIcons").animate({
+width: innerArticlesWidth,
+opacity: 1.0
+}, 1500);
+$j(".viewBar").animate({
+opacity: 0
+}, 1500);
+}
+else {
+$j(".innerArticleIcons").animate({
+width: "1px",
+opacity: 0.4
+}, 1500);
+setTimeout(function () {
+$j(".innerArticleIcons").css("height", "1px");
+}, 1500);
+$j(".viewBar").animate({
+opacity: 1
+}, 1500);
+$j(this).removeClass("hideExpand");
+}
+});
+});
+// Script for share popup window
+function popupwindowAtCenter(url, title, w, h) {
+var left = (screen.width / 2) - (w / 2);
+var top = (screen.height / 2) - (h / 2);
+return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+}
+</script> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><meta name="Title" content="Develop and Install a Windows Service in C#"><script src="./Develop and Install a Windows Service in C#_files/secureAnonymousFramework"></script><script type="text/javascript" charset="utf-8" async="" src="./Develop and Install a Windows Service in C#_files/button.0317b7570df4f1e40626c32ea11afc85.js"></script></head> <body id="MasterBody"> <form method="post" action="" id="aspnetForm"> <div class="aspNetHidden"> <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value=""> <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value=""> <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTY1NDU2MTA1Mg8WAh4TVmFsaWRhdGVSZXF1ZXN0TW9kZQIBFgJmDw8WDh4IQXV0aG9ySUQFDG5hcmVzaC5hdmFyaR4NQ3VycmVudFJhdGluZwUBMB4GU3RhdHVzBQEyHgtIYXNGZWVkYmFja2geCUFydGljbGVJRAUkZTc1ODJhNWYtM2UyYS00ZDgyLTg1MDEtNjE1NmY5ODQ5NmQ3Hg9NaW5vckNhdGVnb3J5SWQFAjc4Hg5Ud2l0dGVySGFuZGxlcmVkFgICAQ9kFihmD2QWCAIBD2QWEAIBDxYCHgdWaXNpYmxlZxYEAgEPFgQeA3NyYwViaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS9VcGxvYWRGaWxlL0F1dGhvckltYWdlL0RlZmF1bHRBdXRob3JJbWFnZS5naWYuYXNoeD93aWR0aD0yNSZoZWlnaHQ9MjUeA2FsdAUHZGhhcmFuaWQCAw8WAh4JaW5uZXJodG1sBQdkaGFyYW5pZAICDxYCHgRocmVmBUtodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL1VzZXJSZWdpc3RyYXRpb24vVXNlclJlZ2lzdHJhdGlvbi5hc3B4P2NoZWNrPXJkAgUPFgQfDAUcaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbR8IaGQCCA8WBB4FdGl0bGUFH1lvdSBoYXZlIDAgbmV3IGFydGljbGUgY29tbWVudHMfCGdkAgsPFgQfDQUXWW91IGhhdmUgMCBuZXcgbWVzc2FnZXMfCGdkAg8PFgQfDQUcWW91IGhhdmUgMCBuZXcgbm90aWZpY2F0aW9ucx8IZ2QCFA8WAh8IaGQCFg8WAh8MBRxodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tZAIDD2QWAgIBDxYCHgtfIUl0ZW1Db3VudAIEFghmD2QWAmYPFQJdaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS9FdmVudHMvMTc5L3dlYmluYXItZ2V0dGluZy1zdGFydGVkLXdpdGgtYXp1cmUtY2xvdWQtc2VydmljZS5hc3B4MVdlYmluYXI6IEdldHRpbmcgU3RhcnRlZCB3aXRoIEF6dXJlIENsb3VkIFNlcnZpY2VkAgEPZBYCZg8VAk9odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL0V2ZW50cy8xNzgvaW5mcmFnaXN0aWNzLWRheS1oYWNraW5nLWFuZ3VsYXJqcy5hc3B4IkxlYXJuIEFuZ3VsYXJKUyBieSBEaGFuYW5qYXkgS3VtYXJkAgIPZBYCZg8VAlFodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL05ld3MvNTEzMy9uZXctZmVhdHVyZS11cGNvbWluZy1ldmVudHMtYW5ub3VuY2VkLmFzcHglTmV3IEZlYXR1cmUgVXBjb21pbmcgRXZlbnRzIEFubm91bmNlZGQCAw9kFgJmDxUCS2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vTmV3cy80ODU3LzIwMTUtaGFsZi15ZWFybHktbXZwcy1hbm5vdW5jZWQuYXNweB4yMDE1IEZpcnN0IEhhbGYgTVZQcyBBbm5vdW5jZWRkAgUPZBYEAgEPFgIfDAUcaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbWQCAw9kFgICAQ8PFgIfCGhkZAIHD2QWAgIBD2QWAgIBDzwrAAkBAA8WBB4IRGF0YUtleXMWAB8OAkxkFpgBZg9kFgJmDxUCMGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yMzcvbmV0LTIwMTUuYXNweAkuTkVUIDIwMTVkAgEPZBYCZg8VAjZodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMS9hY3RpdmUtZGlyZWN0b3J5LmFzcHgQQWN0aXZlIERpcmVjdG9yeWQCAg9kFgJmDxUCL2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8xMzEvYWRvLW5ldC5hc3B4B0FETy5ORVRkAgMPZBYCZg8VAixodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMTc2L2FqYXguYXNweARBSkFYZAIED2QWAmYPFQI8aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzU2L2FsZ29yaXRobXMtaW4tQy1TaGFycC5hc3B4EEFsZ29yaXRobXMgaW4gQyNkAgUPZBYCZg8VAjtodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjQ3L2FuZHJvaWQtcHJvZ3JhbW1pbmcuYXNweBNBbmRyb2lkIFByb2dyYW1taW5nZAIGD2QWAmYPFQIxaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzMwMi9hbmd1bGFyanMuYXNweAlBbmd1bGFySlNkAgcPZBYCZg8VAjtodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjI0L0FzcC1OZXQtcHJvZ3JhbW1pbmcuYXNweBNBU1AuTkVUIFByb2dyYW1taW5nZAIID2QWAmYPFQItaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzIzMi9henVyZS5hc3B4BUF6dXJlZAIJD2QWAmYPFQIwaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzMxNC9iaWctZGF0YS5hc3B4CEJpZyBEYXRhZAIKD2QWAmYPFQIwaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzMwOS9idXNpbmVzcy5hc3B4CEJ1c2luZXNzZAILD2QWAmYPFQI7aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE0NC9DLVNoYXJwLXByb2dyYW1taW5nLmFzcHgOQyMgUHJvZ3JhbW1pbmdkAgwPZBYCZg8VAjVodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjM4L2NhcmVlci1hZHZpY2UuYXNweA1DYXJlZXIgQWR2aWNlZAIND2QWAmYPFQIwaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzI4MC9jaGFwdGVycy5hc3B4CENoYXB0ZXJzZAIOD2QWAmYPFQItaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzMyNC9jbG91ZC5hc3B4BUNsb3VkZAIPD2QWAmYPFQI2aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzYxL2NyeXN0YWwtcmVwb3J0cy5hc3B4D0NyeXN0YWwgUmVwb3J0c2QCEA9kFgJmDxUCN2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8xNzAvY3VycmVudC1hZmZhaXJzLmFzcHgPQ3VycmVudCBBZmZhaXJzZAIRD2QWAmYPFQI1aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzIyMC9kYXRhYmFzZXMtZGJhLmFzcHgPRGF0YWJhc2VzICYgREJBZAISD2QWAmYPFQIyaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE0NS9kZXBsb3ltZW50LmFzcHgKRGVwbG95bWVudGQCEw9kFgJmDxUCQGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS82Mi9kZXNpZ24tcGF0dGVybnMtcHJhY3RpY2VzLmFzcHgbRGVzaWduIFBhdHRlcm5zICYgUHJhY3RpY2VzZAIUD2QWAmYPFQI0aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzI5My9keW5hbWljcy1jcm0uYXNweAxEeW5hbWljcyBDUk1kAhUPZBYCZg8VAj5odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMTU5L2VudGVycHJpc2UtZGV2ZWxvcG1lbnQuYXNweBZFbnRlcnByaXNlIERldmVsb3BtZW50ZAIWD2QWAmYPFQI4aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzY1L2dhbWVzLXByb2dyYW1taW5nLmFzcHgRR2FtZXMgUHJvZ3JhbW1pbmdkAhcPZBYCZg8VAjpodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMzIzL2dvb2dsZS1kZXZlbG9wbWVudC5hc3B4Ekdvb2dsZSBEZXZlbG9wbWVudGQCGA9kFgJmDxUCMGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yMjEvaGFyZHdhcmUuYXNweAhIYXJkd2FyZWQCGQ9kFgJmDxUCMGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8xNDMvaG93LWRvLWkuYXNweAlIb3cgZG8gSSBkAhoPZBYCZg8VAi5odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjQ0L2h0bWwtNS5hc3B4BkhUTUwgNWQCGw9kFgJmDxUCM2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS82Ni9pbnRlcm5ldC13ZWIuYXNweA5JbnRlcm5ldCAmIFdlYmQCHA9kFgJmDxUCOmh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8zMjAvaW50ZXJuZXQtb2YtdGhpbmdzLmFzcHgSSW50ZXJuZXQgb2YgVGhpbmdzZAIdD2QWAmYPFQIraHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzIzNS9pb3MuYXNweANpT1NkAh4PZBYCZg8VAixodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjU4L2phdmEuYXNweARKYXZhZAIfD2QWAmYPFQIyaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzIzMy9qYXZhc2NyaXB0LmFzcHgKSmF2YVNjcmlwdGQCIA9kFgJmDxUCLmh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yMzYvanF1ZXJ5LmFzcHgGSlF1ZXJ5ZAIhD2QWAmYPFQIwaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzMwMC9rbm9ja291dC5hc3B4CEtub2Nrb3V0ZAIiD2QWAmYPFQIxaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE4Ni9sZWFybi1uZXQuYXNweApMZWFybiAuTkVUZAIjD2QWAmYPFQIsaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE4MC9saW5xLmFzcHgETElOUWQCJA9kFgJmDxUCOGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8zMTMvbWFjaGluZS1sZWFybmluZy5hc3B4EE1hY2hpbmUgTGVhcm5pbmdkAiUPZBYCZg8VAjhodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjg4L21pY3Jvc29mdC1vZmZpY2UuYXNweBBNaWNyb3NvZnQgT2ZmaWNlZAImD2QWAmYPFQI3aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzI0NS9taWNyb3NvZnQtcGhvbmUuYXNweA9NaWNyb3NvZnQgUGhvbmVkAicPZBYCZg8VAi1odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvNjcvbW9iaWxlLmFzcHgGTW9iaWxlZAIoD2QWAmYPFQI2aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE0OS9tdWx0aXRocmVhZGluZy5hc3B4Dk11bHRpdGhyZWFkaW5nZAIpD2QWAmYPFQIvaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzMwNC9ub2RlLWpzLmFzcHgHTm9kZS5qc2QCKg9kFgJmDxUCLmh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yMDgvb29wb29kLmFzcHgHT09QL09PRGQCKw9kFgJmDxUCM2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yNzYvb3Blbi1zb3VyY2UuYXNweAtPcGVuIFNvdXJjZWQCLA9kFgJmDxUCOWh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yMjIvb3BlcmF0aW5nLXN5c3RlbXMuYXNweBFPcGVyYXRpbmcgU3lzdGVtc2QCLQ9kFgJmDxUCLmh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yOTkvb3JhY2xlLmFzcHgGT3JhY2xlZAIuD2QWAmYPFQIraHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzI3OS9waHAuYXNweANQSFBkAi8PZBYCZg8VAjBodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMzA4L3Bvd2VyLWJpLmFzcHgIUG93ZXIgQklkAjAPZBYCZg8VAjBodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjgzL3Byb2R1Y3RzLmFzcHgIUHJvZHVjdHNkAjEPZBYCZg8VAi5odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMzIyL3B5dGhvbi5hc3B4BlB5dGhvbmQCMg9kFgJmDxUCMGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8zMDYvcWxpa3ZpZXcuYXNweAhRbGlrVmlld2QCMw9kFgJmDxUCOWh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8xOTYvcm9ib3RpY3MtaGFyZHdhcmUuYXNweBNSb2JvdGljcyAmIEhhcmR3YXJlZAI0D2QWAmYPFQIyaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzMxNy9zYWxlc2ZvcmNlLmFzcHgKU2FsZXNmb3JjZWQCNQ9kFgJmDxUCNmh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS83MS9zZWN1cml0eS1pbi1uZXQuYXNweBBTZWN1cml0eSBpbiAuTkVUZAI2D2QWAmYPFQIyaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE4My9zaGFyZXBvaW50LmFzcHgKU2hhcmVQb2ludGQCNw9kFgJmDxUCL2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8zMDEvc2lnbmFsci5hc3B4B1NpZ25hbFJkAjgPZBYCZg8VAjNodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjEwL3NpbHZlcmxpZ2h0LmFzcHgLU2lsdmVybGlnaHRkAjkPZBYCZg8VAjRodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjE2L3NxbC1sYW5ndWFnZS5hc3B4DFNRTCBMYW5ndWFnZWQCOg9kFgJmDxUCMmh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yOTcvc3FsLXNlcnZlci5hc3B4ClNRTCBTZXJ2ZXJkAjsPZBYCZg8VAi9odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMTc0L3Rlc3RpbmcuYXNweAdUZXN0aW5nZAI8D2QWAmYPFQI+aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzEzOC91bml2ZXJzYWwtd2luZG93cy1hcHBzLmFzcHgWVW5pdmVyc2FsIFdpbmRvd3MgQXBwc2QCPQ9kFgJmDxUCOGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yNzcvdmlzdWFsLWJhc2ljLW5ldC5hc3B4EVZpc3VhbCBCYXNpYyAuTkVUZAI+D2QWAmYPFQI1aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzI5Ni92aXN1YWwtc3R1ZGlvLmFzcHgNVmlzdWFsIFN0dWRpb2QCPw9kFgJmDxUCK2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8xOTIvd2NmLmFzcHgDV0NGZAJAD2QWAmYPFQIxaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzMwNy93ZWFyYWJsZXMuYXNweAlXZWFyYWJsZXNkAkEPZBYCZg8VAjdodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMTU0L3dlYi1kZXZlbG9wbWVudC5hc3B4D1dlYiBEZXZlbG9wbWVudGQCQg9kFgJmDxUCNGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8xMzMvd2ViLXNlcnZpY2VzLmFzcHgMV2ViIFNlcnZpY2VzZAJDD2QWAmYPFQIyaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzI3NS93aW5kb3dzLTEwLmFzcHgKV2luZG93cyAxMGQCRA9kFgJmDxUCN2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS83Ny93aW5kb3dzLWNvbnRyb2xzLmFzcHgQV2luZG93cyBDb250cm9sc2QCRQ9kFgJmDxUCNGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS83Ni93aW5kb3dzLWZvcm1zLmFzcHgNV2luZG93cyBGb3Jtc2QCRg9kFgJmDxUCO2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yOTIvd2luZG93cy1zZXJ2ZXItMjAxMi5hc3B4E1dpbmRvd3MgU2VydmVyIDIwMTJkAkcPZBYCZg8VAjdodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvNzgvd2luZG93cy1zZXJ2aWNlcy5hc3B4EFdpbmRvd3MgU2VydmljZXNkAkgPZBYCZg8VAitodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMTkxL3dwZi5hc3B4A1dQRmQCSQ9kFgJmDxUCL2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8zMTkveGFtYXJpbi5hc3B4B1hhbWFyaW5kAkoPZBYCZg8VAixodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMTkwL3hhbWwuYXNweARYQU1MZAJLD2QWAmYPFQIqaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzc5L3htbC5hc3B4A1hNTGQCAQ9kFgICAQ8WAh8OAgoWFGYPZBYCZg8VAlFodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL1VwbG9hZEZpbGUvMTQ1YzkzL2NydWQtb3BlcmF0aW9ucy11c2luZy1hamF4LXBhcnQtMi8jQ1JVRCBPcGVyYXRpb25zIFVzaW5nIEFqYXggLSBQYXJ0IDJkAgEPZBYCZg8VAmFodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL1VwbG9hZEZpbGUvZDYyOGU0L2NyZWF0ZS1hbmQtY2hhbmdlLXVzZXItYWNjb3VudC10eXBlLWluLXdpbmRvd3MtMTAvJ0NyZWF0ZSBBbmQgQ2hhbmdlIFVzZXIgQWNjb3VudCBUeXBlIC4uLmQCAg9kFgJmDxUCW2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vVXBsb2FkRmlsZS9kNjI4ZTQvaG93LXRvLXR1cm4tb25vZmYtdGFibGV0LW1vZGUtaW4td2luZG93cy0xMC8nSG93IHRvIFR1cm4gb24mIzQ3O29mZiBUYWJsZXQgTW9kZSAgLi4uZAIDD2QWAmYPFQJsaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS9VcGxvYWRGaWxlLzc3YTgyYy9vcGVuLWFub3RoZXItZ3JpZHZpZXctaW4tcG9wLXVwLXVzaW5nLWJvb3RzdHJhcC1tb2RhbC1wb3AtdXAvJ09wZW4gQW5vdGhlciBHcmlkdmlldyBpbiBQb3AtdXAgdXNpIC4uLmQCBA9kFgJmDxUCbGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vVXBsb2FkRmlsZS9kNjI4ZTQvaG93LXRvLWN1c3RvbWl6ZS15b3VyLWRlZmF1bHQtZmlsZXMtc2F2ZS1sb2NhdGlvbnMtaW4td2luZG93LydDdXN0b21pemUgeW91ciBEZWZhdWx0IEZpbGVzIFNhdmUgTCAuLi5kAgUPZBYCZg8VAl5odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL1VwbG9hZEZpbGUvZDYyOGU0L2hvdy10by1yZW1vdmUtdW5uZWNlc3NhcnktYXBwcy1mcm9tLXdpbmRvd3MtMTAvJFJlbW92ZSB1bndhbnRlZCBBcHBzIGZyb20gV2luZG93cyAxMGQCBg9kFgJmDxUCXWh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vVXBsb2FkRmlsZS9iMzFhYzIvc2luZ2xlLXBhZ2UtYXBwbGljYXRpb24td2l0aC1hbmd1bGFyanMtaW4tbmV0LydTaW5nbGUgUGFnZSBBcHBsaWNhdGlvbiB3aXRoIEFuZ3VsYSAuLi5kAgcPZBYCZg8VAkFodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL1VwbG9hZEZpbGUvbWFoZXNoL2Jlc3QtQy1TaGFycC1ib29rLwxCZXN0IEMjIEJvb2tkAggPZBYCZg8VAlJodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL1VwbG9hZEZpbGUvNGQ5MDgzL3Byb2plY3QtZ3ltb25lLWRlbW8tcHJvamVjdC1pbi1tdmMvEE1WQyBEZW1vIFByb2plY3RkAgkPZBYCZg8VAmxodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL1VwbG9hZEZpbGUvNzBkYmU2L2Jlc3QtZXZlci1wZXJmb3JtYW5jZS1hbmQtZGVidWdnaW5nLXRvb2xzLWluLXZpc3VhbC1zdHVkaW8tMi8nQmVzdCBFdmVyIFBlcmZvcm1hbmNlIEFuZCBEZWJ1Z2dpbmcgLi4uZAICD2QWAgIBDw8WBh4IQ3NzQ2xhc3MFG3Nwcml0ZSBkZXRhaWxzIGludGVybWVkaWF0ZR4HVG9vbFRpcAUMSW50ZXJtZWRpYXRlHgRfIVNCAgJkZAIEDxYCHwhnZAIFDxYCHwwFN2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS83OC93aW5kb3dzLXNlcnZpY2VzLmFzcHgWAgIBDw8WBh4NQWx0ZXJuYXRlVGV4dAUQV2luZG93cyBTZXJ2aWNlcx4ISW1hZ2VVcmwFJy9VcGxvYWRGaWxlL01pbm9yQ2F0SW1hZ2VzLzAyMjUxN0FNLnBuZx8RBRBXaW5kb3dzIFNlcnZpY2VzZGQCBg8WAh8LBStEZXZlbG9wIGFuZCBJbnN0YWxsIGEgV2luZG93cyBTZXJ2aWNlIGluIEMjZAIHDxYEHwwFQ2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vQXV0aG9ycy9uYXJlc2guYXZhcmkvbmFyZXNoLWF2YXJpLmFzcHgfCwUMTmFyZXNoIEF2YXJpZAIIDw8WAh4EVGV4dAUMRmViIDI0LCAyMDE0ZGQCCg8WAh8LBYsBVGhpcyBhcnRpY2xlIGV4cGxhaW5zIGEgc3RlcC1ieS1zdGVwIHByb2Nlc3Mgb2YgZGV2ZWxvcGluZyBhbmQgaW5zdGFsbGluZyBhIFdpbmRvd3MgU2VydmljZSB0byBkbyBhIHNjaGVkdWxlZCBqb2IgYmFzZWQgb24gYSB0aW1lIGludGVydmFsLmQCDA8WAh8LBSAyNjAuMTxzcGFuIGNsYXNzPSd1bml0Jz5rPC9zcGFuPmQCDQ8PFgIfFQUCMTlkZAIRDxYCHwwFHy9BdXRob3JzL25hcmVzaC5hdmFyaS9hcnRpY2xlcy9kAhIPFgIfDAVFL0FydGljbGVzL0RlZmF1bHQuYXNweD9BcnRpY2xlSWQ9ZTc1ODJhNWYtM2UyYS00ZDgyLTg1MDEtNjE1NmY5ODQ5NmQ3ZAIUDw8WBh8QBSVuZXdTcHJpdGVJY29ucyBtYWtlX2FydGljbGVfdW5GZWF0dXJlHxEFHE1ha2UgdGhpcyBhcnRpY2xlIHVuZmVhdHVyZWQfEgICZGQCGQ8PFgIfEQUORGluZXNoIEJlbml3YWxkZAIbD2QWAgIBD2QWAgIBDxYCHw4CARYCZg9kFgICAQ8PFgYeD0NvbW1hbmRBcmd1bWVudAUEOTgxMx4LQ29tbWFuZE5hbWUFai4uL1VwbG9hZEZpbGUvbmFyZXNoLmF2YXJpL2RldmVsb3AtYW5kLWluc3RhbGwtYS13aW5kb3dzLXNlcnZpY2UtaW4tQy1TaGFycC9kb3dubG9hZC9UZXN0V2luZG93U2VydmljZS56aXAfFQUVVGVzdFdpbmRvd1NlcnZpY2UuemlwZGQCHg9kFgICAw8WAh8IaGQCHw8PFgIeCEF1dGhvcklkBQxuYXJlc2guYXZhcmlkFhxmDxYCHwwFQ2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vQXV0aG9ycy9uYXJlc2guYXZhcmkvbmFyZXNoLWF2YXJpLmFzcHgWAgIBDxYEHwkFRGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vVXBsb2FkRmlsZS9BdXRob3JJbWFnZS9uYXJlc2guYXZhcmkuanBnHwoFDE5hcmVzaCBBdmFyaWQCAQ8WBB8LBQxOYXJlc2ggQXZhcmkfDAVDaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS9BdXRob3JzL25hcmVzaC5hdmFyaS9uYXJlc2gtYXZhcmkuYXNweGQCAg8WAh8LBdICSSBhbSBhIE1pY3Jvc29mdCBDZXJ0aWZpZWQgLk5FVCBEZXZlbG9wZXIgKE1DU0QgLSBXZWIgQXBwbGljYXRpb25zKSB3aXRoIG11Y2ggZW50aHVzaWFzbSBhbmQgNSsgeWVhcnMgb2YgZGl2ZXJzZSBleHBlcmllbmNlIGluIGRldmVsb3BtZW50IG9mIG11bHRpLXRpZXIgZGF0YWJhc2UtZHJpdmVuIHN5c3RlbXMgd2l0aCByaWNoIFVJLiBJIGhhdmUgaW52b2x2ZWQgaW4gY29tcGxldGUgUy4uLiA8YSBocmVmPSdodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL0F1dGhvcnMvbmFyZXNoLmF2YXJpL25hcmVzaC1hdmFyaS5hc3B4JyBjbGFzcz0nTGlua05vcm1hbEJsdWUnPlJlYWQgbW9yZTwvYT5kAgMPFgIfCGhkAgQPFgQfDQUNTm90IEF2YWlsYWJsZR4FY2xhc3MFBm5vdFNldGQCBQ8WBB8NBQ1Ob3QgQXZhaWxhYmxlHxkFBm5vdFNldGQCBg8WAh8MBSVodHRwOi8vbnoubGlua2VkaW4uY29tL2luL25hcmVzaGF2YXJpZAIHDw8WCB8RBUFZb3UgbXVzdCBlYXJuIG1pbmltdW0gMTAwIHBvaW50cyBiZWZvcmUgeW91IGNhbiBjb250YWN0IGEgbWVtYmVyLh8QBQZub3RTZXQeB0VuYWJsZWRoHxICAmRkAggPFgIfCwUDNTM3ZAIJDxYCHwsFBjI3MC41a2QCCg8WBB8ZBQ1tZWRhbCBTdGFydGVyHw0FDlN0YXJ0ZXIgTWVtYmVyZAILDxYEHxkFDWNvdW50IFN0YXJ0ZXIfCwUHU3RhcnRlcmQCDA8WBB8ZBQtsaV8zIG5vdFNldB8NBSBDIyBDb3JuZXIgTVZQIC0gTm90IGF3YXJkZWQgeWV0LmQCDQ8WAh8IaGQCIQ8PFgYeCUNvbnRlbnRJZAUkZTc1ODJhNWYtM2UyYS00ZDgyLTg1MDEtNjE1NmY5ODQ5NmQ3Hg1Db250ZW50VXNlcklkBQxuYXJlc2guYXZhcmkeDENvbnRlbnRUaXRsZQUrRGV2ZWxvcCBhbmQgSW5zdGFsbCBhIFdpbmRvd3MgU2VydmljZSBpbiBDI2QWBGYPZBYCAgEPEA9kFgIeB29uY2xpY2sFKkNvbW1lbnRzX2FydGljbGUuVXBkYXRlRm9sbG93U3RhdHVzKHRoaXMpO2RkZAIBDxYCHwhnZAIiD2QWAgIBD2QWBAICD2QWAgIBDw8WAh4LXyFEYXRhQm91bmRnZGQCCA9kFgICAQ8PFgIfH2dkZBgBBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WAQUeY3RsMDAkQ29tbWVudHMxJEZvbGxvd0NoZWNrQm94UvzZS9SaKBnaQEhxys5CGBhISqo="> </div> <script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+theForm.__EVENTTARGET.value = eventTarget;
+theForm.__EVENTARGUMENT.value = eventArgument;
+theForm.submit();
+}
+}
+//]]> </script> <script src="./Develop and Install a Windows Service in C#_files/WebResource.axd" type="text/javascript"></script> <div class="master"> <a name="Top"></a> <div class="responsiveHeader"> <script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function () {
+deferLogin();
+});
+function deferLogin() {
+if (window.jQuery)
+domReadyLogin();
+else
+setTimeout(function () { deferLogin() }, 100);
+}
+function domReadyLogin() {
+var showLogin = jQuery('#ctl00_HeaderWithoutAjax1_Login1_HiddenShowLogin').val();
+if(showLogin && showLogin=="1") {
+jQuery('.loginPopup').show();
+}
+var showAnnouncement = jQuery('#ctl00_HeaderWithoutAjax1_Login1_HiddenShowAnnouncement').val();
+if (showAnnouncement && showAnnouncement == "1") {
+ShowAnnouncementPopup();
+}
+var flag;
+var textBoxClientId = '#ctl00_HeaderWithoutAjax1_Login1_TextBoxUserId';
+var value = jQuery(textBoxClientId).val();
+jQuery(textBoxClientId).click(function() {
+if (value == "Invalid ID / Password")
+jQuery(textBoxClientId).val('');
+});
+//login popup js start here//
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_loginBtn').click(function() {
+flag = 1;
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_LoginSpan').slideToggle("slow");
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_TextBoxUserId').focus();
+});
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_UserDetailContainer').mouseover(function() {
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_LogoutSpan').show();
+});
+jQuery('.loginPopup.loggedIn').mouseover(function() {
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_LogoutSpan').show();
+jQuery('.userdetailCntr').addClass('hover');
+});
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_UserDetailContainer').mouseout(function() {
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_LogoutSpan').hide();
+});
+jQuery('.loginPopup.loggedIn').mouseout(function() {
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_LogoutSpan').hide();
+jQuery('.userdetailCntr').removeClass('hover');
+});
+jQuery('.loginPopup').click(function() {
+flag = 1;
+});
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_UserDetailContainer').click(function() {
+flag = 1;
+});
+var close = true;
+jQuery('.notificationMessageCntr').click(function () {
+var id = jQuery(this)[0].id;
+if (id != 'askQuestion') {
+if (jQuery(this).next().is(':visible')) {
+jQuery(this).find('.arrow').hide();
+jQuery(this).next().hide();
+}
+else {
+jQuery('.msg_container').hide();
+jQuery('.notificationMessageCntr .arrow').hide();
+flag = false;
+close = false;
+jQuery(this).find('.arrow').show();
+jQuery(this).next().show();
+ResetNotificationCount(this);
+}
+}
+});
+jQuery('.msg_container').click(function () {
+close = false;
+});
+jQuery(document).click(function () {
+if (flag != 1) {
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_LoginSpan').hide();
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_LogoutSpan').hide();
+}
+flag = 0;
+//login popup js end here//
+//debugger;
+if (close) {
+jQuery('.notificationMessageCntr .arrow').hide();
+jQuery('.msg_container').hide();
+}
+close = true;
+});
+// google sign-in
+function signinCallback(authResult) {
+if (authResult['status']['signed_in']) {
+try {
+gapi.client.load('plus', 'v1', function () {
+var request = gapi.client.plus.people.get({
+'userId': 'me'
+});
+request.execute(function (resp) {
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldEmail').val(resp.emails[0].value.toString());
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldFirstName').val(resp.name.givenName.toString());
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldLastName').val(resp.name.familyName.toString());
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldType').val('google');
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_ButtonLoginSocial').click();
+});
+});
+}
+catch (err) {
+alert(jQuery('#HiddenErrorMessage').val());
+}
+} else {
+console.log('Sign-in state: ' + authResult['error']);
+}
+}
+var additionalParams = {
+'callback': signinCallback
+};
+var signinButton = document.getElementById('googleLoginHeader');
+if (signinButton != null) {
+signinButton.addEventListener('click', function () {
+gapi.auth.signIn(additionalParams);
+console.log(gapi);
+});
+}
+};
+//Reset notification count
+//type: 1- Message Notification, 2- Comment Notification
+function ResetNotificationCount(container) {
+var type = 0;
+if (jQuery(container).attr('id') == 'messageNotification')
+type = 1;
+else if (jQuery(container).attr('id') == 'commentNotification')
+type = 2;
+else if (jQuery(container).attr('id') == 'generalNotifications')
+type = 3;
+if (type != 0) {
+jQuery.ajax({
+url: "/Handlers/CsharpCommon.ashx?method=reset_notification_message_count&type=" + type,
+type: "POST",
+async: false,
+beforeSend: function () {
+if (type == 1)
+jQuery('#imgComments').show();
+if (type == 2)
+jQuery('#imgMessages').show();
+if (type == 3)
+jQuery('#imgGeneralNotifications').show();
+},
+success: function (response) {
+jQuery(container).find('.messageCount').hide();
+if (response[0] == undefined)
+var response = "";
+if (response == 'login')
+var response = "";
+if (type == 1) {
+if (response != "") {
+jQuery('#dvMessages').empty();
+jQuery('#dvMessages').html(response);
+}
+else {
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_LabelNoData').show();
+}
+}
+if (type == 2) {
+if (response != "") {
+jQuery('#dvComments').empty();
+jQuery('#dvComments').html(response);
+}
+else {
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_LabelNoComments').show();
+}
+}
+if (type == 3) {
+if (response != "") {
+jQuery('#dvGeneralNotifications').empty();
+jQuery('#dvGeneralNotifications').html(response);
+}
+else {
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_LabelNoDataNotifications').show();
+}
+}
+},
+complete: function () {
+if (type == 1)
+jQuery('#imgComments').hide();
+if (type == 2)
+jQuery('#imgMessages').hide();
+if (type == 3)
+jQuery('#imgGeneralNotifications').hide();
+}
+});
+}
+}
+//google sign-in ends here
+</script> <div class="page" style="position: relative; z-index: 999;"> <div class="loginControl"> <div id="ctl00_HeaderWithoutAjax1_Login1_UserDetailContainer" class="userdetailCntr"> <div class="image"> <img src="./Develop and Install a Windows Service in C#_files/DefaultAuthorImage.gif" id="ctl00_HeaderWithoutAjax1_Login1_UserImage" alt="dharani"> </div> <label id="ctl00_HeaderWithoutAjax1_Login1_LabelUserName" class="display_none_mobile">dharani</label> </div> <div id="askQuestion" class="notificationMessageCntr display_none_mobile"> <a id="ctl00_HeaderWithoutAjax1_Login1_PostForum" class="icons askaquestion" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Login1$PostForum','')"></a> </div> <div id="commentNotification" class="notificationMessageCntr"> <span id="ctl00_HeaderWithoutAjax1_Login1_ImageButtonComments" class="icons comments" title="You have 0 new article comments"> </span><span class="arrow" style="display: none;">&nbsp;</span> </div> <div id="userCommentBox" class="msg_container" style="display: none;"> <div class="NoticationLoading"> <label id="ctl00_HeaderWithoutAjax1_Login1_LabelNoComments" style="display: none; text-align: center; color:red;">No new comments.</label> <a id="imgComments" href="javascript:void(0)" class="loadmore" style="display: none;
+text-align: center"> <img src="./Develop and Install a Windows Service in C#_files/ajax-loader-small.gif"></a> </div> <ul> <div id="dvComments"> </div> </ul> <a class="LinkNormalBlue" style="margin-right: 10px; float: right; margin-top: 10px;
+font-size: 13px;" href="http://www.c-sharpcorner.com/notification/">Go to all comments &gt;&gt;</a> </div> <div id="messageNotification" class="notificationMessageCntr"> <span id="ctl00_HeaderWithoutAjax1_Login1_ImageButtonMessages" class="icons message" title="You have 0 new messages"> </span><span class="arrow" style="display: none;">&nbsp;</span> </div> <div id="userMsgBox" class="msg_container" style="display: none;"> <div class="NoticationLoading"> <label id="ctl00_HeaderWithoutAjax1_Login1_LabelNoData" style="display: none; text-align: center; color:red;">No new messages.</label> <a id="imgMessages" href="javascript:void(0)" class="loadmore" style="display: none; 
+text-align: center"> <img src="./Develop and Install a Windows Service in C#_files/ajax-loader-small.gif"></a> </div> <ul> <div id="dvMessages"> </div> </ul> <a href="http://www.c-sharpcorner.com/notification/notification.aspx" id="ctl00_HeaderWithoutAjax1_Login1_LinkButtonAllMessages" class="LinkNormalBlue" style="margin-right: 10px;
+float: right; margin-top: 10px; font-size:13px;">Go to all messages &gt;&gt;</a> </div> <div id="generalNotifications" class="notificationMessageCntr"> <span id="ctl00_HeaderWithoutAjax1_Login1_ImageButtonGeneralNotifications" class="icons notification" title="You have 0 new notifications"></span><span class="arrow" style="display: none;">&nbsp;</span> </div> <div id="generalNotificationContainer" class="msg_container general_notifications" style="display: none;"> <div class="NoticationLoading"> <a id="ctl00_HeaderWithoutAjax1_Login1_LabelNoDataNotifications" style="display: none; text-align: center;">No new notifications.</a> <a id="imgGeneralNotifications" href="javascript:void(0)" class="loadmore" style="display: none;
+text-align: center"> <img src="./Develop and Install a Windows Service in C#_files/ajax-loader-small.gif"></a> </div> <ul> <div id="dvGeneralNotifications"> </div> </ul> <a class="LinkNormalBlue" style="margin-right: 10px; float: right; margin-top: 10px;
+color: #06c; font-size: 13px;" href="http://www.c-sharpcorner.com/notification/GeneralNotification.aspx">Go
+to all notifications &gt;&gt;</a> </div> <div class="notificationMessageCntr display_none_mobile"> <span class="arrow" style="display: none;">&nbsp;</span> </div> <div class="msg_container" style="display: none;"> <ul id="ctl00_HeaderWithoutAjax1_Login1_UnapprovedContentStats" class="unapproved_stats"> </ul> </div> </div> <div id="ctl00_HeaderWithoutAjax1_Login1_LogoutSpan" class="loginPopup loggedIn" style="display: none;"> <ul> <li> <a id="ctl00_HeaderWithoutAjax1_Login1_LinkButtonMyAccount" class="myac" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Login1$LinkButtonMyAccount','')">My Account</a> </li> <li> <a id="ctl00_HeaderWithoutAjax1_Login1_LinkButtonProfile" class="profileview" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Login1$LinkButtonProfile','')">View Profile</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Login1_LinkButtonEditProfile" class="editprofile" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Login1$LinkButtonEditProfile','')">Edit Profile</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Login1_LinkButtonChangePassword" class="changepassword" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Login1$LinkButtonChangePassword','')">Change Password</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Login1_LinkButtonSetting" class="setting" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Login1$LinkButtonSetting','')">Settings</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Login1_ImageButtonLogout" class="signout" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Login1$ImageButtonLogout','')">Logout</a> </li> </ul> </div> <a class="menuButton"></a> <a href="http://www.c-sharpcorner.com/" id="ctl00_HeaderWithoutAjax1_Login1_AnchorResponsiveLogo" class="logo_responsive"> &nbsp;</a> </div> <input type="hidden" id="HiddenErrorMessage" value="Unable to fetch your account data!"> <input type="hidden" name="ctl00$HeaderWithoutAjax1$Login1$HiddenFieldUserId" id="ctl00_HeaderWithoutAjax1_Login1_HiddenFieldUserId"> <input type="hidden" name="ctl00$HeaderWithoutAjax1$Login1$HiddenFieldEmail" id="ctl00_HeaderWithoutAjax1_Login1_HiddenFieldEmail"> <input type="hidden" name="ctl00$HeaderWithoutAjax1$Login1$HiddenFieldFirstName" id="ctl00_HeaderWithoutAjax1_Login1_HiddenFieldFirstName"> <input type="hidden" name="ctl00$HeaderWithoutAjax1$Login1$HiddenFieldLastName" id="ctl00_HeaderWithoutAjax1_Login1_HiddenFieldLastName"> <input type="hidden" name="ctl00$HeaderWithoutAjax1$Login1$HiddenFieldType" id="ctl00_HeaderWithoutAjax1_Login1_HiddenFieldType"> <input type="hidden" name="ctl00$HeaderWithoutAjax1$Login1$HiddenShowLogin" id="ctl00_HeaderWithoutAjax1_Login1_HiddenShowLogin"> <input type="hidden" name="ctl00$HeaderWithoutAjax1$Login1$HiddenShowAnnouncement" id="ctl00_HeaderWithoutAjax1_Login1_HiddenShowAnnouncement"> <input type="submit" name="ctl00$HeaderWithoutAjax1$Login1$ButtonLoginSocial" value="" id="ctl00_HeaderWithoutAjax1_Login1_ButtonLoginSocial" style="display: none;"> <script>
+function FacebookLogin() {
+FB.login(function(response) {
+if (response.authResponse) {
+FB.api('/me', function(response) {
+try {
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldUserId').val(response.id.toString());
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldEmail').val(response.email.toString());
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldFirstName').val(response.first_name.toString());
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldLastName').val(response.last_name.toString());
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldType').val('facebook');
+jQuery('#ctl00_HeaderWithoutAjax1_Login1_ButtonLoginSocial').click();
+}
+catch (err) {
+alert(jQuery('#HiddenErrorMessage').val());
+}
+});
+} else {
+console.log('User cancelled login or did not fully authorize.');
+}
+}, { scope: 'publish_actions, email' });
+}
+</script> <script type="text/javascript">
+var textBoxEmailClientId = '#ctl00_HeaderWithoutAjax1_Login1_TextBoxUserId';
+var textBoxPasswordClientId = '#ctl00_HeaderWithoutAjax1_Login1_TextBoxPassword';
+function validateRequiredFields() {
+var userId = jQuery(textBoxEmailClientId);
+var userPwd = jQuery(textBoxPasswordClientId);
+if (userId.val() !== "" && userPwd.val() !== "") {
+jQuery('#spanRequiredId').hide();
+jQuery('#spanRequiredPassword').hide();
+}
+else {
+if (userId.val() == "" && userPwd.val() == "") {
+jQuery('#spanRequiredId').show();
+jQuery('#spanRequiredPassword').show();
+jQuery(userId).focus();
+}
+else if (userId == "") {
+jQuery('#spanRequiredId').show();
+jQuery('#spanRequiredPassword').hide();
+jQuery(userId).focus();
+}
+else {
+jQuery('#spanRequiredId').hide();
+jQuery('#spanRequiredPassword').show();
+jQuery(userPwd).focus();
+}
+return false;
+}
+return true;
+}
+function RemoveValidationMessage()
+{
+//To clear the validation error text (*) if user has typed something.
+var userIdValue = jQuery(textBoxEmailClientId).val().toString().trim();
+var pwdValue=jQuery(textBoxPasswordClientId).val().toString().trim();
+if(userIdValue!="")
+{
+jQuery('#spanRequiredId').hide();
+}
+if(pwdValue!="")
+{
+jQuery('#spanRequiredPassword').hide();
+}
+}
+</script> <div class="header"> <div class="topHeaderConainer" style="width: 100%; float: left;"> <script>
+document.addEventListener('DOMContentLoaded', function () {
+deferInFocus();
+});
+function deferInFocus() {
+if (window.jQuery)
+domReadyInFocus();
+else
+setTimeout(function () { deferInFocus() }, 100);
+}
+function domReadyInFocus() {
+jQuery.getScript('/JQuery/ticker_21122013.js', function() {
+jQuery('#js-news').ticker();
+});
+};
+</script> <style type="text/css">
+.ticker
+{
+width: 538px;
+height: 30px;
+display: block;
+position: relative;
+overflow: hidden;
+}
+.ticker-title
+{
+padding-top: 9px;
+color: #900;
+font-weight: bold;
+text-transform: uppercase;
+}
+.ticker-content
+{
+margin: 0;
+padding-top: 9px;
+position: absolute;
+color: #1f527b;
+overflow: hidden;
+white-space: nowrap;
+line-height: 1.2em;
+}
+.ticker-content a:hover
+{
+text-decoration: none;
+color: #0d3059;
+}
+.ticker-swipe
+{
+padding-top: 9px;
+position: absolute;
+top: 0;
+background-color: #f60;
+display: block;
+width: 800px;
+height: 23px;
+}
+.ticker-swipe span
+{
+margin-left: 1px;
+border-bottom: 1px solid #fff;
+height: 14px;
+width: 7px;
+display: block;
+}
+.js-hidden
+{
+display: none;
+}
+.ticker-controls
+{
+padding: 8px 0 0 0;
+list-style-type: none;
+float: left;
+}
+.left .ticker-controls, .left .ticker-content, .left .ticker-title, .left .ticker
+{
+float: left;
+}
+</style> <div class="InFocusNews display_none" id="InFocus"> <div class="page" style="position: relative;"> <h2>
+In Focus</h2> <div class="rightNew" style="display: inline;"> <div id="ticker-wrapper-1442987369087" class="ticker-wrapper has-js left"><div id="ticker-1442987369087" class="ticker"><div id="ticker-title-1442987369087" class="ticker-title"><span></span></div><p id="ticker-content-1442987369087" class="ticker-content" style="display: block; opacity: 1; left: 0px;"><a href="http://www.c-sharpcorner.com/News/5133/new-feature-upcoming-events-announced.aspx" style="color: White;" rel="nofollow">
+New Feature Upcoming Events Announced</a></p><div id="ticker-swipe-1442987369087" class="ticker-swipe" style="left: 0px; margin-left: 0px;"><span style="display: block;"><!-- --></span></div></div><ul id="ticker-controls-1442987369087" class="ticker-controls"><li id="play-pause-1442987369087" class="jnt-play-pause controls"><a href=""><!-- --></a></li><li id="prev-1442987369087" class="jnt-prev controls"><a href=""><!-- --></a></li><li id="next-1442987369087" class="jnt-next controls"><a href=""><!-- --></a></li></ul></div> </div> </div> </div> <div class="display_none"> <div class="page"> <h1 class="site-logo"><a href="http://www.c-sharpcorner.com/" id="ctl00_HeaderWithoutAjax1_Contribution1_LogoLink" class="logo"></a></h1> <div class="headerBanner"> </div> <div id="ctl00_HeaderWithoutAjax1_Contribution1_ContributionLinks"> <div class="contributeList"> <a href="javascript:void(0);" class="contributeOnHeader">Contribute</a> <ul> <li> <a id="ctl00_HeaderWithoutAjax1_Contribution1_PostArticle" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$PostArticle','')">An Article</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Contribution1_LinkButtonCodeSnippet" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$LinkButtonCodeSnippet','')">A Code Snippet</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Contribution1_PostBlog" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$PostBlog','')">A Blog</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Contribution1_PostNews" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$PostNews','')">A News</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Contribution1_PostVideo" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$PostVideo','')">A Video</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Contribution1_PostResource" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$PostResource','')">A Link</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Contribution1_PostInterview" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$PostInterview','')">An Interview Question</a></li> </ul> </div> <a id="ctl00_HeaderWithoutAjax1_Contribution1_PostForum" class="askQuestionOnHeader" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$PostForum','')">Ask a Question</a> </div> </div> </div> <div id="ctl00_HeaderWithoutAjax1_HeaderMenu" class="HeadermenuStripBlue" style="position: fixed; top: 0px;"> <div class="page" style="position: relative;"> <div class="responsiveMenu" style="height: 356px;"> <div class="SearchBox"> <div id="ctl00_HeaderWithoutAjax1_Panal1" onkeypress="javascript:return WebForm_FireDefaultButton(event, &#39;ctl00_HeaderWithoutAjax1_searchImageButton&#39;)"> <input name="ctl00$HeaderWithoutAjax1$searchTextBox" type="text" id="ctl00_HeaderWithoutAjax1_searchTextBox" class="searchTextBox" placeholder="C# Corner Search" style="font-family:Calibri;"> <input type="submit" name="ctl00$HeaderWithoutAjax1$searchImageButton" value="" id="ctl00_HeaderWithoutAjax1_searchImageButton" class="button"> </div> </div> <ul class="headerMenu"> <li class="display_none" style="background:none;"><a href="http://www.c-sharpcorner.com/" class="csharpHome" title="C# Corner Home">&nbsp;</a></li> <li class="first display_none"><a href="http://www.c-sharpcorner.com/pulse/" title="C# Corner Pulse" class="pulse"></a></li> <li><a href="http://www.c-sharpcorner.com/category/" class="show-dropdown menuLinkBlue">
+TECHNOLOGIES </a> <div class="dropDownMenu" id="dropDown"> <div id="ctl00_HeaderWithoutAjax1_divTechnology" style="overflow: hidden; margin-bottom: 10px;"> <span id="ctl00_HeaderWithoutAjax1_DataListTechnologyTop"><span> <a href="http://www.c-sharpcorner.com/1/237/net-2015.aspx">
+.NET 2015
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/170/current-affairs.aspx">
+Current Affairs
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/233/javascript.aspx">
+JavaScript
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/279/php.aspx">
+PHP
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/277/visual-basic-net.aspx">
+Visual Basic .NET
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/1/active-directory.aspx">
+Active Directory
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/220/databases-dba.aspx">
+Databases &amp; DBA
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/236/jquery.aspx">
+JQuery
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/308/power-bi.aspx">
+Power BI
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/296/visual-studio.aspx">
+Visual Studio
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/131/ado-net.aspx">
+ADO.NET
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/145/deployment.aspx">
+Deployment
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/300/knockout.aspx">
+Knockout
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/283/products.aspx">
+Products
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/192/wcf.aspx">
+WCF
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/176/ajax.aspx">
+AJAX
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/62/design-patterns-practices.aspx">
+Design Patterns &amp; Practices
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/186/learn-net.aspx">
+Learn .NET
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/322/python.aspx">
+Python
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/307/wearables.aspx">
+Wearables
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/56/algorithms-in-C-Sharp.aspx">
+Algorithms in C#
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/293/dynamics-crm.aspx">
+Dynamics CRM
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/180/linq.aspx">
+LINQ
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/306/qlikview.aspx">
+QlikView
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/154/web-development.aspx">
+Web Development
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/247/android-programming.aspx">
+Android Programming
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/159/enterprise-development.aspx">
+Enterprise Development
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/313/machine-learning.aspx">
+Machine Learning
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/196/robotics-hardware.aspx">
+Robotics &amp; Hardware
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/133/web-services.aspx">
+Web Services
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/302/angularjs.aspx">
+AngularJS
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/65/games-programming.aspx">
+Games Programming
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/288/microsoft-office.aspx">
+Microsoft Office
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/317/salesforce.aspx">
+Salesforce
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/275/windows-10.aspx">
+Windows 10
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/224/Asp-Net-programming.aspx">
+ASP.NET Programming
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/323/google-development.aspx">
+Google Development
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/245/microsoft-phone.aspx">
+Microsoft Phone
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/71/security-in-net.aspx">
+Security in .NET
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/77/windows-controls.aspx">
+Windows Controls
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/232/azure.aspx">
+Azure
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/221/hardware.aspx">
+Hardware
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/67/mobile.aspx">
+Mobile
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/183/sharepoint.aspx">
+SharePoint
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/76/windows-forms.aspx">
+Windows Forms
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/314/big-data.aspx">
+Big Data
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/143/how-do-i.aspx">
+How do I 
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/149/multithreading.aspx">
+Multithreading
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/301/signalr.aspx">
+SignalR
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/292/windows-server-2012.aspx">
+Windows Server 2012
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/309/business.aspx">
+Business
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/244/html-5.aspx">
+HTML 5
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/304/node-js.aspx">
+Node.js
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/210/silverlight.aspx">
+Silverlight
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/78/windows-services.aspx">
+Windows Services
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/144/C-Sharp-programming.aspx">
+C# Programming
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/66/internet-web.aspx">
+Internet &amp; Web
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/208/oopood.aspx">
+OOP/OOD
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/216/sql-language.aspx">
+SQL Language
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/191/wpf.aspx">
+WPF
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/238/career-advice.aspx">
+Career Advice
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/320/internet-of-things.aspx">
+Internet of Things
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/276/open-source.aspx">
+Open Source
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/297/sql-server.aspx">
+SQL Server
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/319/xamarin.aspx">
+Xamarin
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/280/chapters.aspx">
+Chapters
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/235/ios.aspx">
+iOS
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/222/operating-systems.aspx">
+Operating Systems
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/174/testing.aspx">
+Testing
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/190/xaml.aspx">
+XAML
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/324/cloud.aspx">
+Cloud
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/258/java.aspx">
+Java
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/299/oracle.aspx">
+Oracle
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/138/universal-windows-apps.aspx">
+Universal Windows Apps
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/79/xml.aspx">
+XML
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/61/crystal-reports.aspx">
+Crystal Reports
+</a> </span></span> </div> <div style="position: absolute; bottom: 0px; left: 0px;"> <a href="http://www.c-sharpcorner.com/ContactUs.aspx?type=7" class="LinkNormalBlue" style="color: #ff6600; background: none; text-transform: none; float: left;">Request
+a new Category</a><span style="float: left; color: #8D8D8D; margin-top: 4px;">|</span> <a href="http://www.c-sharpcorner.com/Category/" class="LinkNormalBlue viewAll" style="color: #36c; background: none!important; text-transform: none; float: left;">
+View All</a> </div> </div> </li> <li><a href="http://www.c-sharpcorner.com/forums/" title="Ask a Question">ANSWERS</a></li> <li><a href="http://www.c-sharpcorner.com/blogs/" title="Share a Blog">BLOGS</a></li> <li><a href="http://www.c-sharpcorner.com/videos/" title="Share a Video">VIDEOS</a></li><li> <a href="http://www.c-sharpcorner.com/interviews/" title="Ask an Interview Question">
+INTERVIEWS</a></li><li><a href="http://www.c-sharpcorner.com/ebooks/" title="Share a Book">
+BOOKS</a></li> <li><a href="http://www.c-sharpcorner.com/news/" title="Submit a News">NEWS</a></li> <li><a href="http://www.c-sharpcorner.com/chapters/" title="Attend an Event">
+CHAPTERS</a></li> <li><a href="http://www.c-sharpcorner.com/careerAdvice/" title="Get career advice">
+CAREER ADVICE</a></li> <li><a href="http://www.c-sharpcorner.com/jobs/" title="Get Jobs">Jobs</a></li> </ul> </div> </div> </div> </div> </div> </div> <script type="text/javascript" language="javascript">
+(function(d, t) {
+var g = d.createElement(t),
+s = d.getElementsByTagName(t)[0];
+g.src = '/JavaScripts/MindcrackerJScript.js';
+s.parentNode.insertBefore(g, s);
+} (document, 'script'));
+</script> <script type="text/javascript">
+$j(window).scroll(function() {
+var topS = $j(window).scrollTop();
+var winWidth = $j(window).width();
+var headerHe = $j(".topHeaderConainer").height() - $j(".HeadermenuStripBlue").height();
+// header js
+if (topS > headerHe) {
+if (parseInt(winWidth) < 767) {
+$j(".HeadermenuStripBlue").css("position", "relative");
+}
+else {
+$j(".HeadermenuStripBlue").css({ "position": "fixed", "top": 0 });
+}
+}
+else if (topS <= (headerHe + $j(".HeadermenuStripBlue").height())) {
+$j(".HeadermenuStripBlue").css("position", "relative");
+}
+});
+</script> <script type="text/javascript">
+// media query js
+$j(document).ready(function() {
+$j(window).resize(function() {
+if ($j(".menuButton").is(':visible')) {
+var windowHeight = $j(window).height();
+$j('.responsiveHeader .responsiveMenu').css("height", windowHeight);
+}
+else {
+$j('.responsiveHeader .responsiveMenu').css("height", 'auto');
+}
+});
+// responsive jquery 
+$j(".menuButton").click(function() {
+var windowHeight = $j(window).height();
+var menu_container = $j('.responsiveHeader .responsiveMenu');
+if (!menu_container.hasClass('hidden')) {
+menu_container.animate({ left: 0 });
+$j('body, .responsiveHeader').animate({ left: 260 + 'px' });
+menu_container.addClass('hidden');
+menu_container.css("height", windowHeight);
+$j('body').css({ 'height': windowHeight, 'overflow': 'hidden', 'position': 'fixed' });
+//$j('.SearchBox').animate({ left: 0 });
+} else {
+menu_container.animate({ left: -260 + 'px' });
+$j('body ,.responsiveHeader').animate({ left: 0 + 'px' });
+menu_container.removeClass('hidden');
+$j('body').css({ 'height': windowHeight, 'overflow-y': 'auto', 'position': 'relative' });
+//$j('.SearchBox').animate({ left: -260 + 'px' });
+}
+});
+try {
+// add 'active' class to active menu selector
+var path = window.location.href.replace(/^https?:\/\//, '').split('/');
+var hostName = window.location.hostname;
+var activeCategory = hostName + '/' + path[1].toLowerCase();
+if (path[1].toLowerCase() === 'uploadfile') {
+var contentHeadingText = document.querySelector('div.article a.HeadingBold').textContent.trim() || document.querySelector('div.article a.HeadingBold').innerText.trim();
+activeCategory = hostName + '/' + contentHeadingText.toLowerCase();
+}
+else {
+if (path[1] === '1') {
+activeCategory = hostName + '/category';
+}
+}
+var activeMenuItem = document.querySelector('ul.headerMenu li a[href*="' + activeCategory + '"]');
+if (activeMenuItem !== null) {
+activeMenuItem.classList.add('active');
+}
+// Menu selector ends here
+}
+catch (err) { }
+});
+</script> <div class="page"> <div class="clear"> </div> <div class="main responsive_marginTop"> <div class="leftCntr"> <div class="trendingNowBox display_none_mobile"> <div class="left" id="example1_wrap"> <div class="bx_wrap"><a href="" class="prev"></a><a href="" class="next"></a><div class="bx_container" style="position: relative; width: 275px; overflow: hidden;"><ul id="example1" style="width: 999999px; position: relative; left: -275px;"><li style="float: left; list-style: none; margin-right: 0px;"><a href="http://www.c-sharpcorner.com/UploadFile/70dbe6/best-ever-performance-and-debugging-tools-in-visual-studio-2/" class="LinkNormalStyle" style="color: Gray;">
+Best Ever Performance And Debugging ...</a></li><li style="float: left; list-style: none; margin-right: 0px;"><a href="http://www.c-sharpcorner.com/UploadFile/145c93/crud-operations-using-ajax-part-2/" class="LinkNormalStyle" style="color: Gray;">
+CRUD Operations Using Ajax - Part 2</a></li><li style="float: left; list-style: none; margin-right: 0px;"><a href="http://www.c-sharpcorner.com/UploadFile/d628e4/create-and-change-user-account-type-in-windows-10/" class="LinkNormalStyle" style="color: Gray;">
+Create And Change User Account Type ...</a></li></ul></div></div> </div> <div class="right"> <div id="ctl00_TrendingNow1_Panal1" onkeypress="javascript:return WebForm_FireDefaultButton(event, &#39;ctl00_TrendingNow1_searchImageButton&#39;)"> <input name="ctl00$TrendingNow1$searchTextBox" type="text" id="ctl00_TrendingNow1_searchTextBox" class="searchTextBox" placeholder="C# Corner Search" style="font-family:Calibri;"> <input type="submit" name="ctl00$TrendingNow1$searchImageButton" value="" id="ctl00_TrendingNow1_searchImageButton" class="button">  </div> </div> </div> <div class="article" id="div1"> <div class="HeadingAr"> <div class="floatRight marginTop"> <div id="ctl00_AuthorRank" class="AuthorRank"> <span id="ctl00_ImageReaderLevel" title="Intermediate" class="sprite details intermediate"></span>
+Reader Level:
+</div> </div> <span id="ctl00_spanArticle" class="floatLeft marginTop5"> <a href="http://www.c-sharpcorner.com/Articles/" id="ctl00_A1" class="HeadingBold grayHeading">
+Article</a> </span><a href="http://www.c-sharpcorner.com/articles/featured.aspx" id="ctl00_FeaturedSpan" class="featured" title="Featured"></a> </div> <div class="clear"> </div> <div class="image display_none_mobile"> <a href="http://www.c-sharpcorner.com/1/78/windows-services.aspx" id="ctl00_AnchorAuthorImage"> <img id="ctl00_imgAuthor" title="Windows Services" class="image90" src="./Develop and Install a Windows Service in C#_files/022517AM.png" alt="Windows Services"></a> </div> <div class="detail"> <div class="grayText"> <h1> <span id="ctl00_LabelArticleTitle" cssclass="BlogsWelcomeHeading">Develop and Install a Windows Service in C#</span> </h1> </div> <div class="LinkNormalGrayLight">
+By <span><a href="http://www.c-sharpcorner.com/Authors/naresh.avari/naresh-avari.aspx" id="ctl00_AuthorLink" class="LinkOrange">Naresh Avari</a></span>
+on
+<span id="ctl00_LabelDate">Feb 24, 2014</span> </div> <div class="LinkNormalGrayLight" style="display: none;"> <span style="color: Black;"></span><span id="ctl00_spanTags"></span> </div> <div id="ctl00_DivDescription" class="normalGray">This article explains a step-by-step process of developing and installing a Windows Service to do a scheduled job based on a time interval.</div> </div> <div class="clear"> </div> <div class="tweetIcon"> </div> </div> <div class="clear"> </div> <div> <span id="ctl00_LabelMessageBox" style="color:Red;"></span> </div> <div class="clear"> </div> <div class="clear"> </div> <div class="contentHeaderArticleIcons"> <ul class="right viewBar"> <li><a title="Views" class="newSpriteIcons like"><span class="point"><span id="ctl00_spanArticleViews">260.1<span class="unit">k</span></span></span></a></li> <li><a href="http://www.c-sharpcorner.com/UploadFile/naresh.avari/develop-and-install-a-windows-service-in-C-Sharp/#ReadAndPostComment" class="newSpriteIcons comments" title="Comments"><span class="point"><span id="spanComments">51</span></span></a></li> <li><a class="newSpriteIcons views" title="Like" onclick="Like();"><span><span class="point"> <span id="ctl00_LabelLikeCount">19</span></span></span></a></li> </ul> <ul class="leftIcons"> <li><a class="newSpriteIcons facebook" href="https://www.facebook.com/sharer.php?u=http%3a%2f%2fgoo.gl%2fMLz5sE" onclick="popupwindowAtCenter(this.href,&#39;Share on Facebook&#39;,600,600);return false;" target="_blank">facebook</a></li> <li><a class="newSpriteIcons twitter" href="https://twitter.com/intent/tweet?&url=http%3a%2f%2fgoo.gl%2fMLz5sE&via=CsharpCorner&related=CsharpCorner&text=Develop+and+Install+a+Windows+Service+in+C%23" target="_blank">twitter</a></li> <li><a class="newSpriteIcons linkedIn" href="https://www.linkedin.com/shareArticle?mini=true&url=http%3a%2f%2fgoo.gl%2fMLz5sE" onclick="popupwindowAtCenter(this.href,&#39;Share on LinkedIn&#39;,600,600);return false;" target="_blank">linkedIn</a></li> <li><a class="newSpriteIcons googlePlus" href="https://plus.google.com/share?url=http%3a%2f%2fgoo.gl%2fMLz5sE" onclick="popupwindowAtCenter(this.href,&#39;Share on Google+&#39;,600,600);return false;" target="_blank">google Plus</a></li> <li class="innerArticleIcons display_none_mobile"> <ul> <li> <a id="ctl00_ImageButtonEmail" title="Email this article to friend" class="newSpriteIcons email" href="javascript:__doPostBack('ctl00$ImageButtonEmail','')"></a></li> <li class="display_none"> <a id="ctl00_ImageButtonAddToMyBookmarks" title="Bookmark this article" class="newSpriteIcons bookmark" href="javascript:__doPostBack('ctl00$ImageButtonAddToMyBookmarks','')"></a> </li> <li class="display_none"><a href="javascript:void(GetPrintVersion())" id="ctl00_AnchorPrintArticle" title="Print" class="newSpriteIcons print"></a></li> <li><a href="http://www.c-sharpcorner.com/Authors/naresh.avari/articles/" id="ctl00_AuthorsOtherArticles" title="Author&#39;s other article" class="newSpriteIcons author_other_article"></a> </li> <li><a href="http://www.c-sharpcorner.com/Articles/Default.aspx?ArticleId=e7582a5f-3e2a-4d82-8501-6156f98496d7" id="ctl00_AnchorSimilarArticles" title="Similar articles" class="newSpriteIcons similar_article"></a></li> <li class="display_none"> </li> <li class="display_none"> </li> <li> <a id="ctl00_ImageButtonHistory" title="Article History" class="newSpriteIcons article_history" href="javascript:__doPostBack('ctl00$ImageButtonHistory','')"></a> </li> <li class="display_none"> </li> <li class="display_none"> </li> <li class="display_none"> </li> <li class="display_none"> </li> <li class="display_none"> </li> </ul> </li> <li><a href="javascript:void(0);" class="newSpriteIcons expand display_none_mobile">
+expand</a></li> </ul> </div> <div class="clear"></div> <div id="ctl00_downloadFiles" class="ratingTilte DownloadLinkbox" style="margin-top: 10px; margin-bottom: 0px;"> <div id="ctl00_DivDownload"> <span class="sprite articleDownload"></span><span style="font-weight: bold; font-size: 14px;
+color: #0D9C2A; float: left;">Download Files:</span> <ul> <li style="float: left;"> <a id="ctl00_RepeaterDownloadFiles_ctl00_LinkButtonDownloadFiles" class="LinkNormalBlue" href="javascript:__doPostBack('ctl00$RepeaterDownloadFiles$ctl00$LinkButtonDownloadFiles','')" style="font-size:14px;font-weight:bold;">TestWindowService.zip</a></li> </ul> </div> </div> <div id="ctl00_ctl09_LinkAd_Container" updatemode="Conditional" class="LinkAd"> <a href="http://www.c-sharpcorner.com/AdRedirector.aspx?AdId=90&target=http://www.aspose.com/.net/total-component.aspx?utm_source=CSharpCorner&amp;utm_medium=banner&amp;utm_campaign=CSharpCorner-Textforums" id="ctl00_ctl09_linkAd" class="linkAd LinkNormalBlue" target="_blank">Download Aspose, it really helps</a> </div> <!--script>
+jQuery("a.linkAd.LinkNormalBlue").click(function () {
+var linkAd = jQuery(this);
+var linkHref = linkAd.prop("href");
+targetUrl = linkHref.substring(0, linkHref.indexOf("&target") + 8) + linkHref.substr(linkHref.indexOf("&target") + 8).replace(/&/gi, "&amp;");
+linkAd.prop("href", targetUrl);
+});
+</script--> <div id="div2" class="PaddingLeft5"><p align="justify"></p><p><strong>What a Windows Service is</strong></p> <ul> <li>Enables you to create long-running executable applications that run in their own windows session.
+</li><li>Can be automatically started when the computer boots, can be paused and restarted without any user interaction.
+</li><li>Easily installable by running the command line utility InstallUtil.exe and passing the path to the service's executable file.</li></ul> <p><strong>Why a Windows Service?</strong><br><br>One of the most common requirements of some businesses is long-running scheduled jobs based on some time interval. For example: sending a newsletter everyday afternoon or send an email alert to the customer for every one hour.<br><br>So building a Windows Service could be one of the reliable solutions to do the goal that can do the required job in the behind the scenes without interfering others users on the same computer.<br><br><strong>Introduction<br></strong><br>This article explains a step-by-step process of developing and installing a Windows Service to do a scheduled job based on a time interval.<br><br>Open Visual Studio and from the menus select "File" -&gt; "New" -&gt; "Project...".<br><br>A New Project window will open. Choose "Visual C#" &gt;&gt; "Windows" project type and select "Windows Service" from the right hand side and name the project "TestWindowsService" as shown in the following screenshot.<br><br><img alt="new project window" src="./Develop and Install a Windows Service in C#_files/new project window.jpg"><br><br>After you click "OK", the project will be created and you will see the design view of the service as shown in the following screen. Right-click the "Service1.cs" file in Solution Explorer and rename it "to" Scheduler or any other name that you want to give it. Then click “click here to switch to code view”.<br><br><img alt="code view" src="./Develop and Install a Windows Service in C#_files/code view.jpg"><br><br>In the code view, you can see two methods called OnStart() and OnStop(). The OnStart() triggers when the Windows Service starts and the OnStop() triggers when the service stops.<br><br><img alt="OnStop triggers " src="./Develop and Install a Windows Service in C#_files/OnStop triggers .jpg"><br>Right-click the TestWindowService project, add a new class and name it "Library.cs". This class will be useful to create the methods that we require in the project. If your TestWindowService is a big project, you can create a ClassLibrary project and reference it to your TestWindowService.<br><br><img alt="new class " src="./Develop and Install a Windows Service in C#_files/new class .jpg"><br><br><strong>Library.cs<br></strong><br>Make the class public and declare it as a Static class.<br><br><img alt="Static class" src="./Develop and Install a Windows Service in C#_files/Static class.jpg"><br><br>Create a log method (WriteErrorLog) to log the exceptions.<br><br><img alt="log method " src="./Develop and Install a Windows Service in C#_files/log method .jpg"><br><br>Create one more log method (WriteErrorLog) to log the custom messages.<br><br><img alt="log method to log " src="./Develop and Install a Windows Service in C#_files/log method to log .jpg"><br><br><strong>Scheduler.cs<br></strong><br>Now return to our Scheduler.cs file and declare a Timer.<br><br><img alt="Timer" src="./Develop and Install a Windows Service in C#_files/Timer.jpg"><br><br>Write the following code in the OnStart() method and timer1_Tick():<br><br><img alt="timer1_Tick" src="./Develop and Install a Windows Service in C#_files/timer1_Tick.jpg"><br><br>Write the following code in the OnStop() method:<br><br><img alt="OnStop method" src="./Develop and Install a Windows Service in C#_files/OnStop method.jpg"><br><strong>Scheduler.cs [Design]<br></strong><br>Now return to the Scheduler.cs [Design]&nbsp;and right-click on the editor window&nbsp;then click "Add Installer".</p> <div><img alt="Add Installer" src="./Develop and Install a Windows Service in C#_files/Add Installer.jpg"><br><br>Then you can see that there will be a new file called "ProjectInstaller.cs" as shown in the following.<br><br><img alt="new file called ProjectInstaller" src="./Develop and Install a Windows Service in C#_files/new file called ProjectInstaller.jpg"><br><br><img alt="Installer" src="./Develop and Install a Windows Service in C#_files/Installer.jpg"><br><br>Right-click on the "serviceInstaller1" and click "Properties".</div> <div>&nbsp;</div> <div><img alt="Properties" src="./Develop and Install a Windows Service in C#_files/Properties.jpg"><br><br>Change the ServiceName to "Test Windows Service" (or your own name) and StartType to "Manual" (or you can choose "Automatic" if you need this service to be automatic).<br><br><img alt="Test Windows Service " src="./Develop and Install a Windows Service in C#_files/Test Windows Service .jpg"><br><br>Right-click the serviceProcessInstaller1, go to the properties window and change "Account" to "LocalSystem".</div> <div>&nbsp;</div> <div><img alt="change Account property" src="./Develop and Install a Windows Service in C#_files/change Account property.jpg"><br><br>Build the project to see the .exe file at the location where you created the solution.<br><br><img alt="Build the project " src="./Develop and Install a Windows Service in C#_files/Build the project .jpg"><br><br>That's all. Your Windows Service is all ready to install in your machine.<br><br><strong>Installing the Windows Service<br></strong><br>Go to "Start" &gt;&gt; "All Programs" &gt;&gt; "Microsoft Visual Studio 2012" &gt;&gt; "Visual Studio Tools"&nbsp;then click "Developer Command Prompt for VS2012".<br><br>Type the following command:<br><br>cd &lt;physical location of your TestWindowService.exe file&gt;<br><br>in my case it is :<br><br>cd C:\Sandbox\WindowServices\TestWindowService\TestWindowService\bin\Debug</div> <div>&nbsp;</div> <div><img alt="Installing the Window Service" src="./Develop and Install a Windows Service in C#_files/Installing the Window Service.jpg">&nbsp;</div> <div>&nbsp;</div> <div>Next type the following command:<br><br>InstallUtil.exe “TestWindowService.exe”</div> <div><br>and press Enter.<br><br><img alt="TestWindowService" src="./Develop and Install a Windows Service in C#_files/TestWindowService.jpg"><br><br>Here you go, the TestWindowService is installed successfully.<br><br><img alt="installed successfully" src="./Develop and Install a Windows Service in C#_files/installed successfully.jpg"><br><br><strong>How to start the Windows Service<br></strong><br>Since we chose StartType = Manual, we must start the Windows Service manually by visiting the "Services and Applications" window in the computer.<br><br><img alt="StartType" src="./Develop and Install a Windows Service in C#_files/StartType.jpg"><br><br>Select the Test Windows Service and click "Start" to start the service. Go to the "TestWindowService.exe" location to see the logs.<br><br><strong>LogFile.txt<br></strong><br>Since we are tracking our Windows Service by writing some logs to a .txt file called LogFile.txt, we can test the working condition of our Windows Service by looking at this log file.<br><br><img alt="LogFile" src="./Develop and Install a Windows Service in C#_files/LogFile.jpg"><br><br>As you can see in the preceding screen, you can find the LogFile.txt file at the physical location that your TestWindowService solution exists.<br><br>Click the LogFile.txt to see the logs, whether our service is doing the job that we set it to do for every 30 seconds.</div> <div>&nbsp;</div> <div><img alt="logs " src="./Develop and Install a Windows Service in C#_files/logs.jpg"><br><br>If you look at the preceding log file, we can prove that our Windows Service is running and doing the job that we wanted on a 30 seconds interval.<br><br><strong>Stop the Windows Service<br></strong><br>To stop the Windows Service, just click "Stop" link in the Services window by selecting our TestWindowService.<br><br>Logfile after stopping our service:</div> <div>&nbsp;</div> <div><img alt="Stop the window service" src="./Develop and Install a Windows Service in C#_files/Stop the window service.jpg"><br><strong></strong></div> <p>Type the following two commands in the "Developer Command Prompt for VS2012" to uninstall the TestWindowService.exe.</p> <ol> <li>cd &lt;physical location of your TestWindowService.exe file&gt;<br>and press Enter. In my case it is:<br>cd C:\Sandbox\WindowServices\TestWindowService\TestWindowService\bin\Debug
+</li><li>InstallUtil.exe /u “TestWindowService.exe”<br>And press enter.<br>After executing the preceding commands, the TestWindowService will be uninstalled from your computer.</li></ol> <p><strong>Summary</strong></p> <p><strong></strong>In this article, I explained how to develop a Windows Service and install it using InstallUtil.exe from a command prompt.<br><br>I believe that I have explained each step clearly that can be easily understandable for a beginner to develop and install a Windows Service.</p> <p></p></div> <div class="clear"> </div> <div class="clear"> </div> <div class="auther_bio"> <a href="http://www.c-sharpcorner.com/Authors/naresh.avari/naresh-avari.aspx" id="ctl00_AboutAuthor1_AuthorImageAnchor" class="image"> <img src="./Develop and Install a Windows Service in C#_files/naresh.avari.jpg" id="ctl00_AboutAuthor1_AuthorImage" alt="Naresh Avari"></a> <div class="autherDetail"> <a href="http://www.c-sharpcorner.com/Authors/naresh.avari/naresh-avari.aspx" id="ctl00_AboutAuthor1_AuthorName" class="userName">Naresh Avari</a> <p id="ctl00_AboutAuthor1_Description" class="description">I am a Microsoft Certified .NET Developer (MCSD - Web Applications) with much enthusiasm and 5+ years of diverse experience in development of multi-tier database-driven systems with rich UI. I have involved in complete S... <a href="http://www.c-sharpcorner.com/Authors/naresh.avari/naresh-avari.aspx" class="LinkNormalBlue">Read more</a></p> <ul class="social"> <li class="twitter"><a id="ctl00_AboutAuthor1_TwitterFollow" title="Not Available" class="notSet">Follow</a></li> <li class="facebook"><a id="ctl00_AboutAuthor1_FacebookProfileUrl" title="Not Available" class="notSet">Facebook</a></li> <li class="linkedIn"><a href="http://nz.linkedin.com/in/nareshavari" id="ctl00_AboutAuthor1_LinkedInProfileUrl" title="LinkedIn">LinkedIn</a></li> <li class="message"> <a id="ctl00_AboutAuthor1_SendMessageImageButton" title="You must earn minimum 100 points before you can contact a member." class="aspNetDisabled notSet">message</a></li> </ul> </div> <div class="clear"> </div> <div class="autherIcons"> <ul> <li class="li_1"><a href="http://www.c-sharpcorner.com/Members/rank/"><span class="rank"> </span><span class="text">rank</span><span id="ctl00_AboutAuthor1_Rank" class="count">537</span></a> </li> <li class="li_2"><a href="http://www.c-sharpcorner.com/Articles/AuthorTopArticles.aspx?authorid=naresh.avari"> <span class="reader"></span><span id="ctl00_AboutAuthor1_Readers" class="count">270.5k</span> <span class="text">read</span> </a></li> <li class="li_4"><span id="ctl00_AboutAuthor1_Medal" class="medal Starter" title="Starter Member"></span><span id="ctl00_AboutAuthor1_MedalText" class="count Starter">Starter</span><span class="text">Member</span></li> <li id="ctl00_AboutAuthor1_CSharpMVP" class="li_3 notSet" title="C# Corner MVP - Not awarded yet."><a href="http://www.c-sharpcorner.com/Members/mvps/"> <span class="csharpmvp"></span><span id="ctl00_AboutAuthor1_MVP" class="count"></span> <span class="text">
+times</span> </a></li> </ul> </div> </div> <div class="clear"> </div> <div id="ctl00_RelatedArticles" class="relatedArticle"> <h3>
+Related Articles
+</h3> <ul> <li><span class="bullet"></span> <a id="ctl00_RepeaterSimilarArticles_ctl00_HyperLinkTitle" href="http://www.c-sharpcorner.com/UploadFile/8f2b4a/how-to-installuninstall-net-windows-service-using-C-Sharp/">How to Install Or Uninstall .NET Windows Service Using C#</a> </li> <li><span class="bullet"></span> <a id="ctl00_RepeaterSimilarArticles_ctl01_HyperLinkTitle" href="http://www.c-sharpcorner.com/uploadfile/vendettamit/installing-and-configuring-the-windows-server-appfabric-cache-services/default.aspx">Installing And Configuring The Windows Server AppFabric Cache Services</a> </li> <li><span class="bullet"></span> <a id="ctl00_RepeaterSimilarArticles_ctl02_HyperLinkTitle" href="http://www.c-sharpcorner.com/UploadFile/8f2b4a/how-to-installuninstall-net-windows-service-C-Sharp/">How to Install or Uninstall C# .NET Windows Service</a> </li> <li><span class="bullet"></span> <a id="ctl00_RepeaterSimilarArticles_ctl03_HyperLinkTitle" href="http://www.c-sharpcorner.com/UploadFile/prvn_131971/BirthdayWishScheduler02022006012557AM/BirthdayWishScheduler.aspx">Birthday Wish Scheduler in C#</a> </li> <li><span class="bullet"></span> <a id="ctl00_RepeaterSimilarArticles_ctl04_HyperLinkTitle" href="http://www.c-sharpcorner.com/UploadFile/sachin.nigam/InstallingWinServiceProgrammatically11262005061332AM/InstallingWinServiceProgrammatically.aspx">Installing a Service Programmatically</a> </li> <li><span class="bullet"></span> <a id="ctl00_RepeaterSimilarArticles_ctl05_HyperLinkTitle" href="http://www.c-sharpcorner.com/UploadFile/cd7c2e/how-to-install-the-windows-server-update-services-in-windows/">How to Install the Windows Server Update Services in Windows Server 2012</a> </li> </ul> </div> <script src="./Develop and Install a Windows Service in C#_files/jquery-Mention-Combined.js" type="text/javascript"></script> <script type="text/javascript">
+var mentionarraydata=[];
+var Comments_article = (function () {
+var pageSize = 10;
+var rootClass = '.article ';
+return {
+//Get Comments
+GetComments: function (parent_id) {
+var pageNumber = $j('#HiddenPageNumber_article').val();
+var rootComments = $j(rootClass + '#RootComments');
+var items = 0;
+$j.ajax({
+type: "POST",
+contentType: "application/json; charset=utf-8",
+url: "/WebServices/Comments.asmx/GetComments",
+data: "{'id':'e7582a5f-3e2a-4d82-8501-6156f98496d7','type':'article','pageNumber':'" + pageNumber + "', 'pageSize':'" + pageSize + "', 'parentId':" + parent_id + "}",
+async: false,
+beforeSend: function () {
+$j(rootClass + '#mainLoader').show();
+},
+success: function (response) {
+var d = response.d;
+var data = d[0];
+var totalComments;
+$j.each(data, function (index) {
+rootComments.prepend(BuildComment(data[index])); //Prepend root comments
+if (pageNumber == 1 && index == 0) {
+$j(rootClass + '#HiddenTotalComments').val(data[index].TotalComments);
+if (d[2][index] == null || d[2][index] == undefined) {
+totalComments = data[index].TotalComments;
+}
+else {
+totalComments = parseFloat(data[index].TotalComments) + parseFloat(d[2][index].TotalComments);
+}
+$j(rootClass + '#TotalComments').text(totalComments); //set total comments only once.
+$j('#spanComments').text(totalComments); //Manages Header Comment Count
+}
+items = parseFloat(items) + 1; //track for number of comments to show
+ManageAlternateColor();
+});
+//Reply Binding starts here
+var reply = d[1];
+var element;
+$j.each(reply, function (index) {
+element = $j(rootClass + '#CommentReplies_' + reply[index].ParentId);
+element.prepend(BulildCommentReply(reply[index]));
+items = parseFloat(items) + 1;
+});
+//Reply Binding ends here
+//Manage paging
+{
+if (items != 0 && parseFloat(pageNumber) >= 1) {
+if (parseFloat(pageNumber) == 1)
+$j(rootClass + '#CommentCount').text(items);
+else
+$j(rootClass + '#CommentCount').text(parseFloat($j(rootClass + '#CommentCount').text()) + items);
+}
+else {
+$j(rootClass + '#Paging').hide();
+}
+ManageViewMoreVisibility();
+}
+$j(rootClass + '#mainLoader').hide();
+}
+});
+},
+//Like Comment
+LikeComment: function (id) {
+VerifyUser();
+var status;
+$j.ajax({
+url: "/Handlers/CommentsHandler.ashx?method=like_comment&id=" + id + "&type=article",
+type: "POST",
+async: false,
+beforeSend: function () {
+$j(rootClass + '#ajaxLoader_' + id).show(); //Show Ajax Loader
+},
+success: function (response) {
+status = response;
+$j(rootClass + '#ajaxLoader_' + id).hide(); //Hide Ajax Loader
+},
+Error: ShowError
+});
+if (status == '1') {
+var likes = $j(rootClass + '#Likes_' + id).text();
+$j(rootClass + '#Likes_' + id).text(parseFloat(likes) + 1);
+}
+else if (status == '2') {
+}
+},
+//Delete Comment
+DeleteComment: function (id, parent_id) {
+VerifyUser();
+var status;
+$j.ajax({
+url: "/Handlers/CommentsHandler.ashx?method=delte_comment&id=" + id + "&type=article",
+type: "POST",
+async: false,
+success: function (response) {
+status = response;
+},
+Error: ShowError
+});
+if (status == '1') {
+var count = $j(rootClass + '#Replies_' + id).text();
+$j(rootClass + '#comment_' + id).remove();
+if (parent_id == 0) {
+ManageAlternateColor();
+ManagePaging('d', count);
+if (GetParentCommentsCount() == 0)
+Comments_article.GetComments(0);
+}
+else {
+var replies = $j(rootClass + '#Replies_' + parent_id).text();
+var totalComments = $j(rootClass + '#TotalComments');
+var commentCount = $j(rootClass + '#CommentCount');
+$j(rootClass + '#Replies_' + parent_id).text(parseFloat(replies) - 1);
+totalComments.text(parseFloat(totalComments.text()) - 1);
+commentCount.text(parseFloat(GetParentCommentsCount()) + parseFloat(GetChildCommentsCount()));
+$j('#spanComments').text(totalComments.text()); //Manages Header Comment Count
+}
+}
+},
+//Post Comment
+PostComment: function (parent_id, e) {
+if (e.keyCode == 13) {
+var rootComments = $j(rootClass + '#RootComments');
+var totalComments = $j(rootClass + '#HiddenTotalComments');
+var commentCount = $j(rootClass + '#CommentCount');
+var comment = null;
+$j('textarea.mention').mentionsInput('val', function(text) {
+comment=text;
+});
+comment=FormatText(comment);
+comment=GetCommentData(comment,'textarea.mention');
+if (comment != '') {
+VerifyUser();
+$j.ajax({
+url: "/WebServices/Comments.asmx/InsertComment",
+data: "{'user_id':'0978eb','content_id':'e7582a5f-3e2a-4d82-8501-6156f98496d7','type':'article','parent_id':'" + parent_id + "', 'description':'" + comment + "'}",
+type: "POST",
+contentType: "application/json; charset=utf-8",
+async: false,
+beforeSend: function () {
+$j(rootClass + '#PostLoader').show(); //Show Ajax Loader
+},
+success: function (response) {
+var data = response.d[0];
+var mailtosendids=[];
+var mailtobesendids=null;
+$j('textarea.mention').mentionsInput('getMentions', function(data) {
+$j.each(data, function(idx, obj) {
+mailtosendids.push(obj.id);
+});
+});
+$j('textarea.mention').mentionsInput('reset', function(data) {
+});                          
+rootComments.append(BuildComment(data));
+ManageAlternateColor();
+$j(rootClass + '#InputCommentText_' + parent_id).val('').trigger('autosize.resize');
+//if (!(parseFloat(totalComments.val()) == parseFloat(commentCount.text()) && parseFloat($j('#HiddenPageNumber_article').val()) > 1))
+if (parseFloat(GetParentCommentsCount()) > parseFloat(pageSize))
+rootComments.find('div').first().remove();
+ManagePaging('i', 0);
+SendMail(comment, '0', data.ParentUserId, data.CommentId);
+if (mailtosendids.length > 0)
+{
+mailtobesendids=mailtosendids.join(",");
+SendNotification(comment,mailtobesendids)
+}
+$j(rootClass + '#PostLoader').hide(); //Hide Ajax Loader
+PreventDefault(e);
+},
+Error: ShowError
+});
+}
+else { PreventDefault(e); }
+}
+},
+//Show Reply TextBox
+ShowReplyBox: function (id) {
+var element = $j(rootClass + '#CommentReplies_' + id);
+if ($j(rootClass + '#CommentReplies_' + id + ' #ReplyContainer_' + id).length)
+{ $j(rootClass + '#CommentReplies_' + id + ' #ReplyContainer_' + id).toggle(); }
+else {
+var postReply = '<div id="ReplyContainer_' + id + '" class="ReplyComment" style="padding-bottom:5px;">\
+<div class="image level1"><img src="http://cscorner.dotnetheaven.netdna-cdn.com/UploadFile/AuthorImage/DefaultAuthorImage.gif" alt="Author Photo"></div>\
+<div class="commentcontent">\
+<textarea id="ReplyComment_' + id + '" onkeypress="Comments_article.PostCommentReply(' + id + ',event);" class="mention" style="height:18px;" spellcheck="true" placeholder="Type your comment here and press Enter Key...."></textarea>\
+</div>\
+<img id="PostLoader_' + id + '" src="http://cscorner.dotnetheaven.netdna-cdn.com/Images/csharp/ajax-loader-small.gif"\
+style="margin: 5px 7px 0px 0px; clear:both; float:right; display:none;" alt="Loading..." />\
+</div>';
+element.append(postReply);
+$j(rootClass + 'textarea#ReplyComment_' + id).elastic();
+GetValueAtTheRate(rootClass + 'textarea#ReplyComment_' + id);
+$j(rootClass + '#ReplyComment_' + id).focus();
+}
+$j(rootClass + '#CommentReplies_' + id).show();
+},
+//Show Replies
+ShowReplies: function (id, anchr) {
+var element = $j(rootClass + '#CommentReplies_' + id);
+var commentCount = $j(rootClass + '#CommentCount');
+//if (element.is(":visible") &&  == '')
+var pageSize = 50;
+if ($j(rootClass + '#Replies_' + id).text() != '0') {
+$j.ajax({
+type: "POST",
+contentType: "application/json; charset=utf-8",
+url: "/WebServices/Comments.asmx/GetComments",
+data: "{'id':'e7582a5f-3e2a-4d82-8501-6156f98496d7','type':'article','pageNumber':'1', 'pageSize':'" + pageSize + "', 'parentId':" + id + "}",
+beforeSend: function () {
+$j(rootClass + '#ajaxLoader_' + id).show(); //Show Ajax Loader
+},
+success: function (response) {
+var d = response.d;
+element.html('');
+var data = d[0];                                                        
+$j.each(data, function (index) {
+data[index].CommentId;
+element.prepend(BulildCommentReply(data[index])); //Prepend root comments
+});
+$j(rootClass + '#ajaxLoader_' + id).hide(); //Hide Ajax Loader
+$j(anchr).remove();
+$j('#CommentReplies_' + id).show();
+commentCount.text(parseFloat(GetParentCommentsCount()) + parseFloat(GetChildCommentsCount()));
+}
+});
+}
+},
+//Expend/Collapse Comment Replies
+ToggleReplies: function (id) {
+$j(rootClass + '#CommentReplies_' + id).toggle();
+},
+//Post Comment Reply
+PostCommentReply: function (parent_id, e) {
+if (e.keyCode == 13) {
+var replyContainer = $j(rootClass + '#ReplyContainer_' + parent_id);
+//var comment = FormatText($j(rootClass + '#ReplyComment_' + parent_id).val());
+var totalComments = $j(rootClass + '#TotalComments');
+var commentCount = $j(rootClass + '#CommentCount');
+var comment=null;
+$j(rootClass + '#ReplyComment_' + parent_id).mentionsInput('val', function(text) {
+comment=text;
+});
+comment =FormatText(comment);
+comment=GetCommentData(comment,rootClass + '#ReplyComment_' + parent_id);
+$j(rootClass +'#ReplyComment_' + parent_id).mentionsInput('reset', function(data) {
+});
+if (comment != '') {
+VerifyUser();
+$j.ajax({
+url: "/WebServices/Comments.asmx/InsertComment",
+data: "{'user_id':'0978eb','content_id':'e7582a5f-3e2a-4d82-8501-6156f98496d7','type':'article','parent_id':'" + parent_id + "', 'description':'" + comment + "'}",
+type: "POST",
+contentType: "application/json; charset=utf-8",
+async: false,
+beforeSend: function () {
+$j(rootClass + '#PostLoader_' + parent_id).show(); //Show Ajax Loader
+},
+success: function (response) {
+var data = response.d[0];
+replyContainer.before(BulildCommentReply(data));
+$j(rootClass + '#ReplyComment_' + parent_id).val('').trigger('autosize.resize');
+var replies = $j(rootClass + '#Replies_' + parent_id).text();
+$j(rootClass + '#Replies_' + parent_id).text(parseFloat(replies) + 1);
+totalComments.text(parseFloat(totalComments.text()) + 1);
+commentCount.text(parseFloat(GetParentCommentsCount()) + parseFloat(GetChildCommentsCount()));
+$j('#spanComments').text(totalComments.text()); //Manages Header Comment Count
+SendMail(comment, '1', data.ParentUserId, data.CommentId); //SendMail(comment, is_child_comment, parent_user_id)
+$j(rootClass + '#PostLoader_' + parent_id).hide(); //Hide Ajax Loader
+PreventDefault(e);
+},
+Error: ShowError
+});
+}
+else { PreventDefault(e); }
+}
+},
+//Show Edit Panel
+ShowEditView: function (commentId) {
+var content = $j(rootClass + '#comment_' + commentId + ' .commentcontent div:eq(0)');
+var editButton = $j(rootClass + '#comment_' + commentId + ' div:eq(0) .edit');
+var editView = '<textarea id="CommentToEdit_' + commentId + '" onkeypress="Comments_article.EditComment(' + commentId + ',event);" class="inputText" spellcheck="true"  ></textarea>\
+<img id="ajaxLoaderEdit_' + commentId + '" src=http://cscorner.dotnetheaven.netdna-cdn.com/Images/csharp/ajax-loader-small.gif style="margin:4px 0px 0px 5px; display:none;" alt="Loading..." />';
+editButton.hide().next().hide();
+content.after(editView);
+var edittext=content.html();
+var existingusers= edittext.match(/<a[^>]+>([^<]+)<\/a>/g);
+var hyperlink=null;
+var username=null;
+//var userid=null;
+//var pieces=null;
+if(existingusers)
+{
+for(var i=0;i<=existingusers.length-1;i++)
+{
+hyperlink= $j(existingusers[i]).attr('href');
+//pieces=hyperlink.split('/');
+//userid=pieces[pieces.length-2];
+username=existingusers[i].match(/<a[^>]+>([^<]+)<\/a>/)[1];           
+mentionarraydata.push(username+'/^g*~o0#g*^/'+hyperlink);
+edittext=edittext.replace(existingusers[i],username);
+}
+}
+$j(rootClass + '#CommentToEdit_' + commentId).val(edittext);
+$j(rootClass + '#CommentToEdit_' + commentId).focus();
+content.hide();
+$j(rootClass + 'textarea#CommentToEdit_' + commentId).elastic();
+},
+//Edit Comment
+EditComment: function (commentId, e) {
+if (e.keyCode == 13) {  
+var content = $j(rootClass + '#comment_' + commentId + ' .commentcontent div:eq(0)');
+var textBox = $j(rootClass + '#CommentToEdit_' + commentId);
+textBox.val(textBox.val().replace('\n', ''));
+var comment = $j(rootClass + '#CommentToEdit_' + commentId).val().trim();
+comment = FormatText(comment);
+comment=GetEditData(comment);                    
+if (comment == content.text() || comment == '') {
+RemoveEditView(commentId);
+PreventDefault(e);
+}
+else {
+VerifyUser();
+var status;
+$j.ajax({
+url: "/Handlers/CommentsHandler.ashx?method=edit_comment&id=" + commentId + "&type=article",
+type: "POST",
+async: false,
+data: { description: comment },
+beforeSend: function () {
+$j(rootClass + '#ajaxLoaderEdit_' + commentId).show(); //Show Ajax Loader
+},
+success: function (response) {
+status = response;
+PreventDefault(e);
+mentionarraydata.length=0;
+},
+Error: ShowError
+});
+if (status == '1') {
+content.html(decodeURIComponent(comment));
+RemoveEditView(commentId);
+}
+}
+}
+else if (e.keyCode == 27) {
+RemoveEditView(commentId);
+}
+},
+//Update Comment Follow Status
+UpdateFollowStatus: function (checkBox) {
+var status;
+status = ($j(checkBox).is(':checked'))?true:false;
+$j.ajax({
+url: "/Handlers/CommentsHandler.ashx?method=comment_follow_status&id=e7582a5f-3e2a-4d82-8501-6156f98496d7&type=article&status=" + status,
+type: "POST",
+async: false,
+beforeSend: function () {
+$j(rootClass + '#PostLoader').show(); //Show Ajax Loader
+},
+success: function (response) {
+if(response=='1')
+$j(rootClass + '#PostLoader').hide();
+},
+Error: ShowError
+});
+},
+//View Previous Comments
+ViewPreviousComments: function () {
+var pageNumber = $j('#HiddenPageNumber_article').val();
+var totalComment = $j(rootClass + '#HiddenTotalComments').val();
+if (parseFloat(totalComment) > (parseFloat(pageNumber) * pageSize)) {
+$j('#HiddenPageNumber_article').val(parseFloat(pageNumber) + 1);
+}
+else {
+$j(rootClass + '#RootComments').text('');
+$j('#HiddenPageNumber_article').val('1');
+}
+Comments_article.GetComments(0);
+},
+//Show editor options
+ShowEditorOptions: function (container,e) {
+$j(container).find('.pulseDelete:first').show();
+},
+//Hide editor options
+HideEditorOptions: function (container,e) {
+$j(container).find('.pulseDelete:first').hide();
+},
+//Show editor options
+ShowEditorOptionsReply: function (container,e) {
+$j(container).find('.pulseDeleteReply:first').show();
+$j(container).parents().eq(2).find('.pulseDelete').hide();
+e.stopPropagation();
+},
+//Hide editor options
+HideEditorOptionsReply: function (container,e) {
+$j(container).find('.pulseDeleteReply:first').hide();
+e.stopPropagation();
+}
+}// End of return
+function PreventDefault(e)//Function to prevent Default Events. Working in IE8
+{
+if (e.preventDefault)
+e.preventDefault();
+else
+e.returnValue = false;
+}
+function BuildComment(obj) {
+var authorUrl = obj.AuthorUrl;
+var desc=unescape(obj.Description);
+var commentHtml;
+commentHtml = '<div id="comment_' + obj.CommentId + '" class="pulsecomment" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);" >';
+if ('0978eb' == obj.UserId || '' == 'E' || '' == 'A') {
+commentHtml += '<div class="pulseDelete">';
+commentHtml += '<span onclick="Comments_article.ShowEditView(' + obj.CommentId + ')" title="Edit" class="sprite edit"></span>';
+if ('0978eb' == obj.UserId || '' == 'A')
+commentHtml += '<span onclick="Comments_article.DeleteComment(' + obj.CommentId + ',' + obj.ParentId + ')" title="Delete" class="sprite delete"></span>';
+commentHtml += '</div>';
+}
+commentHtml += '<div class="image level0"><a href="' + authorUrl + '"><img alt="' + obj.FullName + '" title="' + obj.FullName + '" src="' + obj.PhotoUrl + '" /></a></div>\
+<div class="commentcontent">\
+<div class="commentDescription"  >' + desc + '</div>\
+<div>\
+<a class="LinkRed" href="'  + authorUrl + '">' + obj.FullName + '</a>\
+<span class="floatRight responsive_Commenttime"  style="font-size: 11px;"><span class="watchICon"></span>' + obj.CreatedDate + '</span>\
+</div>\
+<div style="margin-top: 4px;">\
+<ul class="rpv"><li class="newSpriteIcons rank" title="Rank" ><span>'+obj.AuthorRank+'</span></li><li class="newSpriteIcons point" title="Points" ><span>'+obj.AuthorPoints+'</span></li><li class="newSpriteIcons views" title="Total Views" ><span>'+obj.AuthorReadCount+'</span></li></ul>\
+<div class="floatRight pulseAction">\
+<img alt="Loading..." id="ajaxLoader_' + obj.CommentId + '" src=http://cscorner.dotnetheaven.netdna-cdn.com/Images/csharp/ajax-loader-small.gif style="margin:4px 0px 0px 5px; display:none;" />\
+<a class="newSpriteIcons like" onclick="Comments_article.LikeComment(' + obj.CommentId + ')"><span id="Likes_' + obj.CommentId + '">' + obj.Likes + '</span> </a>\
+<a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(' + obj.CommentId + ')" ><span id="Replies_' + obj.CommentId + '">' + obj.Replies + '</span> </a>';
+if ('True' == 'True')
+commentHtml += '<a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(' + obj.CommentId + ')">Post Reply</a>';
+if (parseFloat(obj.Replies) > 3)
+commentHtml += '<a class="newSpriteIcons showAll" onclick="Comments_article.ShowReplies(' + obj.CommentId + ', this)">Show All</a>';
+commentHtml += '</div>\
+</div>\
+<div class="clear"></div>\
+<div id="CommentReplies_' + obj.CommentId + '"></div>\
+</div>\
+</div>';
+return commentHtml;
+}
+function BulildCommentReply(obj) {
+var authorUrl = obj.AuthorUrl;
+var commentHtml = '<div id="comment_' + obj.CommentId + '" class="ReplyComment" onmouseover="Comments_article.ShowEditorOptionsReply(this,event);" onmouseout="Comments_article.HideEditorOptionsReply(this,event);" >';
+if ('0978eb' == obj.UserId || '' == 'E' || '' == 'A') {
+commentHtml += '<div class="pulseDeleteReply">';
+commentHtml += '<span onclick="Comments_article.ShowEditView(' + obj.CommentId + ')" title="Edit" class="sprite edit"></span>';
+if ('0978eb' == obj.UserId || '' == 'A')
+commentHtml += '<span onclick="Comments_article.DeleteComment(' + obj.CommentId + ',' + obj.ParentId + ')" title="Delete" class="sprite delete"></span>';
+commentHtml += '</div>';
+}
+commentHtml += '<div class="image level1"><a href="' + authorUrl + '"><img title="' + obj.FullName + '" src="' + obj.PhotoUrl + '" alt="" /></a></div>\
+<div class="commentcontent">\
+<div class="commentDescription" >' + unescape(obj.Description) + '</div>\
+<div>\
+<a href="' + authorUrl + '" class="LinkRed">' + obj.FullName + '</a>\
+<span class="floatRight responsive_Commenttime"  style="font-size: 11px;"><span class="watchICon"></span>' + obj.CreatedDate + '</span>\
+</div>\
+<div style="margin-top: 4px;">\
+<ul class="rpv"><li class="newSpriteIcons rank" title="Rank" ><span>'+obj.AuthorRank+'</span></li><li class="newSpriteIcons point" title="Points" ><span>'+obj.AuthorPoints+'</span></li><li class="newSpriteIcons views" title="Total Views" ><span>'+obj.AuthorReadCount+'</span></li></ul>\
+<div class="floatRight pulseAction">\
+<img alt="Loading..." id="ajaxLoader_' + obj.CommentId + '" src=http://cscorner.dotnetheaven.netdna-cdn.com/Images/csharp/ajax-loader-small.gif style="margin:4px 0px 0px 5px; display:none;" />\
+<a onclick="Comments_article.LikeComment(' + obj.CommentId + ')" class="newSpriteIcons like"> <span id="Likes_' + obj.CommentId + '">' + obj.Likes + '</span></a>\
+</div>\
+</div>\
+</div>';
+return commentHtml;
+}
+function GetParentCommentsCount() {
+var count = 0;
+//$j(rootClass + '#RootComments > div.pulsecomment').each(function () {
+//    count = count + 1;
+//});
+count = $j(rootClass + '#RootComments > div.pulsecomment').size();
+return count;
+}
+function GetChildCommentsCount() {
+var childNodes = $j(rootClass + '#RootComments > div.pulsecomment div.commentcontent div div.ReplyComment').size();
+var textareas = $j(rootClass + '#RootComments > div.pulsecomment div.commentcontent textarea').size();
+if (childNodes > 0)
+return childNodes - textareas;
+else return 0;
+}
+function ManageAlternateColor() {
+$j(rootClass + '#RootComments > div').removeClass("BackgroundWhite");
+$j(rootClass + '#RootComments > div:odd').addClass("BackgroundWhite");
+}
+//        function FormatTextToInsert(text) {
+//            return escape(($j.trim(text)).replace('<', '&lt;').replace('>', '&gt;').replace('/', '&#47;').replace('"', '&quot;').replace('\n', ''));
+//        }
+function SendMail(comment, is_child_comment, parent_user, commentId) {
+$j.ajax({
+url: "/Handlers/CommentsHandler.ashx?method=send_mail&type=article",
+data: { description: unescape(comment),
+content_title:'Develop and Install a Windows Service in C#',
+content_user_id:'naresh.avari',
+is_child_comment:is_child_comment,
+content_id: 'e7582a5f-3e2a-4d82-8501-6156f98496d7',
+parent_user_id: parent_user,
+request_url:'http://www.c-sharpcorner.com/UploadFile/naresh.avari/develop-and-install-a-windows-service-in-C-Sharp/default.aspx',
+content_url:'',
+content_user_email:'',
+comment_id:commentId
+},
+type: "POST",
+async: false,
+success: function (response) {
+}
+});
+}
+function SendNotification(comment,mailtosendids)
+{
+var pathname = 'http://www.c-sharpcorner.com/UploadFile/naresh.avari/develop-and-install-a-windows-service-in-C-Sharp/default.aspx';
+$j.ajax({
+url: "/Handlers/CommentsHandler.ashx?method=send_notification&type=article",
+data: { description: unescape(comment),
+mailtosend:mailtosendids,
+currenturl:pathname
+},
+type: "POST",
+async: false,
+success: function (response) {
+}
+});
+}
+function VerifyUser() {
+var data;
+$j.ajax({
+url: "/Handlers/CommentsHandler.ashx?method=current_user",
+type: "GET",
+async: false,
+success: function (response) {
+data = $j.parseJSON(response)[0].user_name;
+}
+});
+if (data == null || data == '') {
+var url = 'http://www.c-sharpcorner.com/UserRegistration/Logincheck.aspx?ReturnURL=/UploadFile/naresh.avari/develop-and-install-a-windows-service-in-C-Sharp/';
+window.location = url;
+}
+}
+function ManagePaging(action, count) {
+var totalComments = $j(rootClass + '#TotalComments');
+var commentCount = $j(rootClass + '#CommentCount');
+var total_comments = $j.trim($j(rootClass + '#HiddenTotalComments').val());
+switch (action) {
+case 'i': //increase
+total_comments = parseFloat(total_comments) + 1;
+if ($j.trim(totalComments.text()) == '')
+totalComments.text('1');
+else
+totalComments.text(parseFloat(totalComments.text()) + 1);
+$j(rootClass + '#Paging').show();
+break;
+case 'd': //decrease
+if (parseFloat(total_comments) <= 0) {
+totalComments.text('');
+commentCount.text('');
+$j(rootClass + '#Paging').hide();
+}
+else {
+totalComments.text(parseFloat(totalComments.text()) - (1 + parseFloat(count)));
+total_comments = parseFloat(total_comments) - 1;
+}
+break;
+}
+var parentComments = parseFloat(GetParentCommentsCount());
+commentCount.text(parentComments + parseFloat(GetChildCommentsCount()));
+$j(rootClass + '#HiddenTotalComments').val(total_comments);
+$j('#HiddenPageNumber_article').val(parseInt((parentComments - 1) / pageSize) + 1);
+ManageViewMoreVisibility();
+$j('#spanComments').text(totalComments.text()); //Manages Header Comment Count
+}
+function ManageViewMoreVisibility() {
+var previousComments = $j(rootClass + '#ViewPreviousComments');
+if (parseFloat($j(rootClass + '#HiddenTotalComments').val()) > parseFloat(GetParentCommentsCount()))
+previousComments.show();
+else
+previousComments.hide();
+}
+function RemoveEditView(commentId) {
+var content = $j(rootClass + '#comment_' + commentId + ' .commentcontent div:eq(0)');
+var editButton = $j(rootClass + '#comment_' + commentId + ' div:eq(0) .edit');
+var textBox = $j(rootClass + '#CommentToEdit_' + commentId);
+var ajaxLoader = $j(rootClass + '#ajaxLoaderEdit_' + commentId);
+editButton.show().next().show();
+textBox.val('');
+textBox.remove();
+ajaxLoader.remove();
+content.show();
+}
+function ShowError() {
+alert('There is some error processing your request');
+}
+}());
+$j(document).ready(function () {
+$j.ajaxSetup({ cache: false });
+if ('True' == 'False') {
+$j('#RootPostComment').remove();
+}
+Comments_article.GetComments(0);
+GetValueAtTheRate('textarea.mention');
+$j(document).on("click",function(event) {
+var classname = event.target.className;
+if(classname=== 'mention')
+{
+$j('.mentions-autocomplete-list').has('ul').show();
+}
+else
+{
+$j('.mentions-autocomplete-list').hide();
+}
+});
+//        $j('.commentcontent').not('.ReplyComment').mouseover(function(e){
+//          $j(this).prev().prev().show(); 
+//          e.stopPropagation();
+//        });
+//        
+//        $j('.commentcontent').mouseout(function(e){
+//          $j(this).prev().prev().hide(); 
+//          e.stopPropagation();
+//        });
+//        $j('.pulsecomment').not('.commentcontent .ReplyComment').mouseover(function(e){
+//          $j(this).find('.pulseDelete').show(); 
+//          e.stopPropagation();
+//        });
+//        
+//        $j('.pulsecomment').mouseout(function(e){
+//          $j(this).find('.pulseDelete').hide(); 
+//          $j(this).find('.pulseDeleteReply').hide();
+//           e.stopPropagation();
+//        });
+//        
+//        $j('.pulsecomment .commentcontent .ReplyComment').mouseover(function(e){
+//         $j(this).find('.pulseDeleteReply').show();  
+//         $j('.pulseDelete').hide(); 
+//         e.stopPropagation();
+//        });
+});    
+function GetValueAtTheRate(id) {
+$j(id).mentionsInput({
+minChars:1,
+onDataRequest:function (mode, query, callback) {
+$j.ajax({
+type: "POST",
+contentType: "application/json; charset=utf-8",
+url: "/WebServices/CSharpSearch.asmx/GetAllFriendsFollowers",
+data: "{'name':'"+query+"','user_id':'0978eb','content_id':'e7582a5f-3e2a-4d82-8501-6156f98496d7','type':'article'}",
+async:false,
+success: function (response) {
+var data = response.d;
+var jasondata= [];
+var Id=null,Name=null,Avatar=null,Type=null;
+for(var i=0;i<=data.length-1;i++)
+{
+Id= data[i].Id
+Name= data[i].Name;
+Avatar=data[i].PhotoUrl;
+Type=data[i].AuthorUrl;
+var jasonobj= new JasonObj(Id,Name,Avatar,Type);
+jasondata.push(jasonobj);
+}
+//jasondata = _.filter(jasondata, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
+callback.call(this, jasondata);
+}
+});
+}
+});
+}
+var JasonObj =function(Id, Name, Avatar,Type){
+this.id = Id;
+this.name = Name;
+this.avatar= Avatar;
+this.type = Type;
+};
+function GetCommentData(comment,id)
+{
+var value=null;
+var valuetobereplaced=null; 
+var userURL=null;
+$j(id).mentionsInput('getMentions', function(data) {
+$j.each(data, function(idx, obj) {
+value = '@['+obj.value+']('+obj.type+':'+obj.id+')';
+valuetobereplaced=FormatText(value);
+userURL= '<a target=_blank class=LinkNormalBlue href='+decodeURIComponent(obj.type)+'>'+obj.value+'</a>';
+comment=comment.replace(valuetobereplaced, userURL);
+});
+});
+return comment;            
+}
+function FormatText(text) {
+return escape(($j.trim(text)).replace(/\</g, '&lt;').replace(/\>/g, '&gt;').replace('/', '&#47;').replace('"', '&quot;').replace('\n', '').replace('\\', '&#92;'));
+}  
+function GetEditData(comment) {
+comment = unescape(comment);
+if (mentionarraydata) {
+var username = null;
+var userlink = null;
+for (var i = 0; i <= mentionarraydata.length - 1; i++) {
+username = mentionarraydata[i].split('/^g*~o0#g*^/')[0];
+userlink = mentionarraydata[i].split('/^g*~o0#g*^/')[1];
+if (comment.indexOf(username) !== -1) {
+comment = comment.replace(username, '<a target=_blank class=LinkNormalGray href=' + userlink + '>' + username + '</a>')
+}
+}
+mentionarraydata.length = 0;
+}
+return escape(comment);
+}
+</script> <div class="clear"> </div> <div style="position: relative;" class="article"> <a name="ReadAndPostComment"></a> <div class="commentHeader"> <h2 class="headerControls">
+comments</h2> <img id="mainLoader" src="./Develop and Install a Windows Service in C#_files/ajax-loader-small.gif" style="position: absolute; left: 315px; top: 26px; display: none;" alt="Loading..."> <div id="Paging" class="commentPaging"> <div class="commentpage"> <label id="TotalComments" class="floatRight" style="margin-right: 3px;">51</label> <label class="floatRight" style="margin-right: 3px;">
+of
+</label> <label id="CommentCount" class="floatRight" style="margin-right: 3px;">11</label> <input id="HiddenPageNumber_article" type="hidden" value="1"> <input id="HiddenTotalComments" type="hidden" value="42"> </div> <a id="ViewPreviousComments" class="previousComments" style="" onclick="Comments_article.ViewPreviousComments();return false;">
+View Previous Comments &gt;&gt;</a> </div> </div> <div class="clear"> </div> <div id="ctl00_Comments1_Panel1" class="pulseMainComment" onkeypress="javascript:return WebForm_FireDefaultButton(event, &#39;ctl00_Comments1_Button1&#39;)"> <div class="pulseCommentSectionMain" style="padding: 0px; overflow: inherit"> <div class="pulseCommentSection"> <div id="RootComments"><div id="comment_60858" class="pulsecomment" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/Authors/748cfd/mahesh-rajole.aspx"><img alt="Mahesh Rajole" title="Mahesh Rajole" src="./Develop and Install a Windows Service in C#_files/748cfd20150217012823.jpg.ashx"></a></div><div class="commentcontent"><div class="commentDescription">Hi Naresh, am trying to get DataSet OnStrart() of service but while service in Debug mode it getting the DataSet but after install this service couldn't start.</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/Authors/748cfd/mahesh-rajole.aspx">Mahesh Rajole</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>Apr 09, 2015</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>679</span></li><li class="newSpriteIcons point" title="Points"><span>12</span></li><li class="newSpriteIcons views" title="Total Views"><span>924</span></li></ul><div class="floatRight pulseAction"><img alt="Loading..." id="ajaxLoader_60858" src="./Develop and Install a Windows Service in C#_files/ajax-loader-small.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(60858)"><span id="Likes_60858">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(60858)"><span id="Replies_60858">0</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(60858)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_60858"></div></div></div><div id="comment_63996" class="pulsecomment BackgroundWhite" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/Authors/ccff43/jaison-joe.aspx"><img alt="Jaison Joe" title="Jaison Joe" src="./Develop and Install a Windows Service in C#_files/DefaultAuthorImage.gif.ashx"></a></div><div class="commentcontent"><div class="commentDescription">Nice...!!!</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/Authors/ccff43/jaison-joe.aspx">Jaison Joe</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>Apr 29, 2015</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>690</span></li><li class="newSpriteIcons point" title="Points"><span>1</span></li><li class="newSpriteIcons views" title="Total Views"><span>0</span></li></ul><div class="floatRight pulseAction"><img alt="Loading..." id="ajaxLoader_63996" src="./Develop and Install a Windows Service in C#_files/ajax-loader-small.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(63996)"><span id="Likes_63996">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(63996)"><span id="Replies_63996">0</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(63996)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_63996"></div></div></div><div id="comment_65481" class="pulsecomment" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/Authors/8c3579/krishna-kumar-singh.aspx"><img alt="krishna kumar singh" title="krishna kumar singh" src="./Develop and Install a Windows Service in C#_files/DefaultAuthorImage.gif.ashx"></a></div><div class="commentcontent"><div class="commentDescription">Best article ever</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/Authors/8c3579/krishna-kumar-singh.aspx">krishna kumar singh</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>May 11, 2015</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>690</span></li><li class="newSpriteIcons point" title="Points"><span>1</span></li><li class="newSpriteIcons views" title="Total Views"><span>0</span></li></ul><div class="floatRight pulseAction"><img alt="Loading..." id="ajaxLoader_65481" src="./Develop and Install a Windows Service in C#_files/ajax-loader-small.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(65481)"><span id="Likes_65481">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(65481)"><span id="Replies_65481">0</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(65481)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_65481"></div></div></div><div id="comment_68433" class="pulsecomment BackgroundWhite" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/Authors/957bf4/chandni-jain.aspx"><img alt="Chandni Jain" title="Chandni Jain" src="./Develop and Install a Windows Service in C#_files/DefaultAuthorImage.gif.ashx"></a></div><div class="commentcontent"><div class="commentDescription">hello i am tring your above example and it works fine but as soon as i am trying to connect with sql db it doesn't wotk. how to resolve it?</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/Authors/957bf4/chandni-jain.aspx">Chandni Jain</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>Jun 03, 2015</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>690</span></li><li class="newSpriteIcons point" title="Points"><span>1</span></li><li class="newSpriteIcons views" title="Total Views"><span>0</span></li></ul><div class="floatRight pulseAction"><img alt="Loading..." id="ajaxLoader_68433" src="./Develop and Install a Windows Service in C#_files/ajax-loader-small.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(68433)"><span id="Likes_68433">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(68433)"><span id="Replies_68433">0</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(68433)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_68433"></div></div></div><div id="comment_69018" class="pulsecomment" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/Authors/44fb93/jaipal-reddy.aspx"><img alt="Jaipal Reddy" title="Jaipal Reddy" src="./Develop and Install a Windows Service in C#_files/44fb9320150601082540.jpg.ashx"></a></div><div class="commentcontent"><div class="commentDescription">5/5</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/Authors/44fb93/jaipal-reddy.aspx">Jaipal Reddy</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>Jun 06, 2015</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>323</span></li><li class="newSpriteIcons point" title="Points"><span>524</span></li><li class="newSpriteIcons views" title="Total Views"><span>42.6k</span></li></ul><div class="floatRight pulseAction"><img alt="Loading..." id="ajaxLoader_69018" src="./Develop and Install a Windows Service in C#_files/ajax-loader-small.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(69018)"><span id="Likes_69018">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(69018)"><span id="Replies_69018">0</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(69018)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_69018"></div></div></div><div id="comment_71004" class="pulsecomment BackgroundWhite" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/Authors/c9549d/ashish-shukla.aspx"><img alt="Ashish Shukla" title="Ashish Shukla" src="./Develop and Install a Windows Service in C#_files/DefaultAuthorImage.gif.ashx"></a></div><div class="commentcontent"><div class="commentDescription">It's very helpful for beginners...!!</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/Authors/c9549d/ashish-shukla.aspx">Ashish Shukla</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>Jun 24, 2015</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>690</span></li><li class="newSpriteIcons point" title="Points"><span>1</span></li><li class="newSpriteIcons views" title="Total Views"><span>0</span></li></ul><div class="floatRight pulseAction"><img alt="Loading..." id="ajaxLoader_71004" src="./Develop and Install a Windows Service in C#_files/ajax-loader-small.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(71004)"><span id="Likes_71004">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(71004)"><span id="Replies_71004">0</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(71004)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_71004"></div></div></div><div id="comment_71284" class="pulsecomment" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/Authors/2a8cbe/srinivas-mnd.aspx"><img alt="Srinivas MND" title="Srinivas MND" src="./Develop and Install a Windows Service in C#_files/2a8cbe20150626080223.jpg.ashx"></a></div><div class="commentcontent"><div class="commentDescription">It's a good example. But how to set this to run weekly? Do I need to put the value of the "Interval" by calculating in seconds....it quite difficult!</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/Authors/2a8cbe/srinivas-mnd.aspx">Srinivas MND</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>Jun 26, 2015</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>690</span></li><li class="newSpriteIcons point" title="Points"><span>1</span></li><li class="newSpriteIcons views" title="Total Views"><span>0</span></li></ul><div class="floatRight pulseAction"><img alt="Loading..." id="ajaxLoader_71284" src="./Develop and Install a Windows Service in C#_files/ajax-loader-small.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(71284)"><span id="Likes_71284">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(71284)"><span id="Replies_71284">1</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(71284)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_71284"><div id="comment_76269" class="ReplyComment" onmouseover="Comments_article.ShowEditorOptionsReply(this,event);" onmouseout="Comments_article.HideEditorOptionsReply(this,event);"><div class="image level1"><a href="http://www.c-sharpcorner.com/Authors/23279a/myles-brewster.aspx"><img title="Myles Brewster" src="./Develop and Install a Windows Service in C#_files/DefaultAuthorImage.gif.ashx" alt=""></a></div><div class="commentcontent"><div class="commentDescription">Keep the Interval at 30 seconds. In your timer1_Tick method put some code to get todays date, then check if it is the 1st day of the week etc. Then run your weekly task if the task hasn't been run already.</div><div><a href="http://www.c-sharpcorner.com/Authors/23279a/myles-brewster.aspx" class="LinkRed">Myles Brewster</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>Jul 24, 2015</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>NA</span></li><li class="newSpriteIcons point" title="Points"><span>0</span></li><li class="newSpriteIcons views" title="Total Views"><span>0</span></li></ul><div class="floatRight pulseAction"><img alt="Loading..." id="ajaxLoader_76269" src="./Develop and Install a Windows Service in C#_files/ajax-loader-small.gif" style="margin:4px 0px 0px 5px; display:none;"><a onclick="Comments_article.LikeComment(76269)" class="newSpriteIcons like"> <span id="Likes_76269">0</span></a></div></div></div></div></div></div></div><div id="comment_73446" class="pulsecomment BackgroundWhite" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/Authors/c4d1d5/vishali.aspx"><img alt="Vishali " title="Vishali " src="./Develop and Install a Windows Service in C#_files/DefaultAuthorImage.gif.ashx"></a></div><div class="commentcontent"><div class="commentDescription">very useful for me to learn window service</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/Authors/c4d1d5/vishali.aspx">Vishali </a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>Jul 09, 2015</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>689</span></li><li class="newSpriteIcons point" title="Points"><span>2</span></li><li class="newSpriteIcons views" title="Total Views"><span>0</span></li></ul><div class="floatRight pulseAction"><img alt="Loading..." id="ajaxLoader_73446" src="./Develop and Install a Windows Service in C#_files/ajax-loader-small.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(73446)"><span id="Likes_73446">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(73446)"><span id="Replies_73446">0</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(73446)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_73446"></div></div></div><div id="comment_75907" class="pulsecomment" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/Authors/be63b7/savindrasingh-shahoo.aspx"><img alt="SavindraSingh Shahoo" title="SavindraSingh Shahoo" src="./Develop and Install a Windows Service in C#_files/be63b7.jpg.ashx"></a></div><div class="commentcontent"><div class="commentDescription">This is an excellent article. That helped me develop one service for network monitoring. However, I am still not clear on how to install the service on other computers?</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/Authors/be63b7/savindrasingh-shahoo.aspx">SavindraSingh Shahoo</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>Jul 22, 2015</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>690</span></li><li class="newSpriteIcons point" title="Points"><span>1</span></li><li class="newSpriteIcons views" title="Total Views"><span>0</span></li></ul><div class="floatRight pulseAction"><img alt="Loading..." id="ajaxLoader_75907" src="./Develop and Install a Windows Service in C#_files/ajax-loader-small.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(75907)"><span id="Likes_75907">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(75907)"><span id="Replies_75907">0</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(75907)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_75907"></div></div></div><div id="comment_83962" class="pulsecomment BackgroundWhite" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/Authors/79d976/cody-s.aspx"><img alt="Cody S." title="Cody S." src="./Develop and Install a Windows Service in C#_files/DefaultAuthorImage.gif.ashx"></a></div><div class="commentcontent"><div class="commentDescription">it says "Access is denied." Please help. I'm a beginner.</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/Authors/79d976/cody-s.aspx">Cody S.</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>Aug 29, 2015</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>690</span></li><li class="newSpriteIcons point" title="Points"><span>1</span></li><li class="newSpriteIcons views" title="Total Views"><span>0</span></li></ul><div class="floatRight pulseAction"><img alt="Loading..." id="ajaxLoader_83962" src="./Develop and Install a Windows Service in C#_files/ajax-loader-small.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(83962)"><span id="Likes_83962">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(83962)"><span id="Replies_83962">0</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(83962)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_83962"></div></div></div> </div> <div class="pulsecomment borderNone" id="RootPostComment" style="min-height: 42px;"> <div class="image level0"> <img src="./Develop and Install a Windows Service in C#_files/DefaultAuthorImage.gif" alt=""> </div> <div id="ctl00_Comments1_PanelPostComment" class="commentcontentPost" onkeypress="javascript:return WebForm_FireDefaultButton(event, &#39;ctl00_Comments1_ButtonPost&#39;)"> <div class="mentions-input-box"><div class="mentions"><div></div></div><textarea id="InputCommentText_0" style="height: 31px; overflow: hidden;" onkeypress="Comments_article.PostComment(&#39;0&#39;,event);" class="mention" spellcheck="true" placeholder="Type your comment here and press Enter Key...." data-mentions-input="true"></textarea><div style="position: absolute; display: none; word-wrap: break-word; white-space: pre-wrap; border: 0.666667px solid rgb(220, 220, 220); font-weight: normal; width: 660px; font-family: pt_sansregular; line-height: normal; font-size: 14px; padding: 5px;">&nbsp;</div><div class="mentions-autocomplete-list" style="display: none;"></div></div> <input type="submit" name="ctl00$Comments1$ButtonPost" value="" id="ctl00_Comments1_ButtonPost" style="display: none;"> </div> <span title="If checked, you&#39;ll get email notification for any comment posted" style="display: inline-block;
+margin-top: 6px; clear: both;"><input id="ctl00_Comments1_FollowCheckBox" type="checkbox" name="ctl00$Comments1$FollowCheckBox" checked="checked" onclick="Comments_article.UpdateFollowStatus(this);"><label for="ctl00_Comments1_FollowCheckBox">Follow Comments</label></span> <img id="PostLoader" src="./Develop and Install a Windows Service in C#_files/ajax-loader-small.gif" alt="Loading..." style="clear: both; margin: 10px 5px 0px 0px; float: right; display: none;"> </div> </div> </div> <input type="submit" name="ctl00$Comments1$Button1" value="" onclick="return false;" id="ctl00_Comments1_Button1" style="display: none;"> <input type="hidden" name="ctl00$Comments1$HiddenFieldEmailComment" id="ctl00_Comments1_HiddenFieldEmailComment"> <input type="hidden" name="ctl00$Comments1$HiddenFieldIsChildComment" id="ctl00_Comments1_HiddenFieldIsChildComment"> <input type="hidden" name="ctl00$Comments1$HiddenFieldParentUserId" id="ctl00_Comments1_HiddenFieldParentUserId"> </div> <div class="clear"> </div> <div id="ctl00_Comments1_SocialComments" class="socialComments"> <div class="commentHeader"> <h2 class="headerControls floatLeft">
+COMMENT USING</h2> <span class="facebookComments" style="margin: 3px 5px;"></span> </div> <div class="fb-comments" data-href="http://www.c-sharpcorner.com/UploadFile/naresh.avari/develop-and-install-a-windows-service-in-C-Sharp/" data-width="675" data-num-posts="5"> </div> </div> </div> <div> </div> </div> <div class="rightCntr"> <div id="ctl00_RightBar_ArticleDetailRightBar1_PremiumSponsorTextAd1_SponsorWithImage" updatemode="Conditional"> <h2 class="headerControls">
+SPONSORED BY
+</h2> <div id="ctl00_RightBar_ArticleDetailRightBar1_PremiumSponsorTextAd1_SponsorAdWithImage" class="adBox"> <div class="adImage"> <a href="http://www.c-sharpcorner.com/AdRedirector.aspx?AdId=88&target=https://www.jetbrains.com/dotnet/?utm_source=csharpcorner&utm_medium=banner&utm_content=resharper-ultimate&utm_campaign=resharper" id="ctl00_RightBar_ArticleDetailRightBar1_PremiumSponsorTextAd1_HrefSponsorLinkImage" rel="nofollow" target="_blank"> <img src="./Develop and Install a Windows Service in C#_files/084523AM.png" id="ctl00_RightBar_ArticleDetailRightBar1_PremiumSponsorTextAd1_imgSponsor" width="75" height="90" class="image90"> </a> </div> <div class="adRight"> <a href="http://www.c-sharpcorner.com/AdRedirector.aspx?AdId=88&target=https://www.jetbrains.com/dotnet/?utm_source=csharpcorner&utm_medium=banner&utm_content=resharper-ultimate&utm_campaign=resharper" id="ctl00_RightBar_ArticleDetailRightBar1_PremiumSponsorTextAd1_HrefSponsorLink" class="MemberoftheMonth" target="_blank">JetBrains ReSharper Ultimate</a> <div id="ctl00_RightBar_ArticleDetailRightBar1_PremiumSponsorTextAd1_divSponsorDetail">.NET code analysis, refactorings, navigation, unit testing, code coverage and profiling in Visual Studio, a bonus for C++ devs, bundled at 50% off.</div> </div> </div> </div> <div class="clear"> </div> <div style="width: 336px; margin:10px 0;"> <a id="ctl00_RightBar_ArticleDetailRightBar1_NewsArticleAd1_AdRotatorArticle" href="http://www.c-sharpcorner.com/AdRedirector.aspx?BannerId=728&target=http://www.infragistics.com/products/jquery?utm_source=c-sharpcorner.com&utm_medium=Banner&utm_content=jQuery%20338x280&utm_campaign=c-sharpcorner.com%20jQuery%20Banner" target="_blank"><img src="./Develop and Install a Windows Service in C#_files/Sample_apps_338x280_2.jpg" alt="Infragistics jQuery Controls"></a> </div> <h2 class="headerControls">
+Trending up <a href="http://www.c-sharpcorner.com/RSS/TopArticles.aspx" id="ctl00_RightBar_ArticleDetailRightBar1_TrendingUp1_RssEnabledImageButton" class="headerRss" target="_blank"></a> </h2> <div class="rightBox"> <ul class="trendingBox"> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+01</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/145c93/crud-operations-using-ajax-part-2/">
+CRUD Operations Using Ajax - Part 2</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+02</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/d628e4/create-and-change-user-account-type-in-windows-10/">
+Create And Change User Account Type In Windows 10</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+03</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/d628e4/how-to-turn-onoff-tablet-mode-in-windows-10/">
+How to Turn on/off Tablet Mode in Windows 10</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+04</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/77a82c/open-another-gridview-in-pop-up-using-bootstrap-modal-pop-up/">
+Open Another Gridview in Pop-up using Bootstrap Modal Pop-up</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+05</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/d628e4/how-to-customize-your-default-files-save-locations-in-window/">
+Customize your Default Files Save Locations in Windows 10</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+06</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/d628e4/how-to-remove-unnecessary-apps-from-windows-10/">
+Remove unwanted Apps from Windows 10</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+07</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/mahesh/best-C-Sharp-book/">
+Best C# Book</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+08</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/4d9083/project-gymone-demo-project-in-mvc/">
+MVC Demo Project</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+09</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/70dbe6/best-ever-performance-and-debugging-tools-in-visual-studio-2/">
+Best Ever Performance And Debugging Tools In Visual Studio 2015</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+10</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/f0b2ed/mongodb-day14-aggregations/">
+MongoDB - Day 14 (Aggregations)</a> </div> </li> </ul> <a href="http://www.c-sharpcorner.com/Articles/TopArticles.aspx" class="viewAllLink">
+View All </a> </div> <div style="padding-bottom: 10px;"> <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-follow-button twitter-follow-button-rendered" title="Twitter Follow Button" src="./Develop and Install a Windows Service in C#_files/follow_button.html" data-screen-name="csharpcorner" style="position: absolute; visibility: hidden; width: 0px; height: 0px;"></iframe> </div> <div id="fb-root"> </div> <div class="fb-like-box" data-href="https://www.facebook.com/pages/C-Corner/194086953935286" data-width="336px" data-show-faces="true" data-stream="false" data-header="true" data-border-color="#c6c6c6" data-max-rows="2" style="padding-bottom: 10px;
+border: none 0px" async="false"> </div> <div class="clear"> </div> <div style="width: 336px; margin-bottom: 10px;"> <a id="ctl00_RightBar_ArticleDetailRightBar1_NewsArticleAdMiddle1_AdRotatorArticle" href="http://www.c-sharpcorner.com/AdRedirector.aspx?BannerId=730&target=http://www.syncfusion.com/sales/xamarinwebinar?utm_medium=mindcrackerxamSept15" target="_blank"><img src="./Develop and Install a Windows Service in C#_files/336X280.jpg" alt="Download Free E-books"></a> </div> <div class="clear"> </div> </div> </div> </div> <div class="footer"> <div class="menuStripGray"> <div class="page"> <ul> <li class="first"><a href="http://www.c-sharpcorner.com/Members/mvps/">MVPs</a></li> <li><a href="http://www.c-sharpcorner.com/Articles/mostviewed.aspx">MOST VIEWED</a></li> <li><a href="http://www.c-sharpcorner.com/Members/legend/">LEGENDS</a></li> <li><a href="http://www.c-sharpcorner.com/articles/">NOW</a></li> <li><a href="http://www.c-sharpcorner.com/prizes/">PRIZES</a></li> <li><a href="http://www.c-sharpcorner.com/reviews/">REVIEWS</a></li> <li><a href="http://www.c-sharpcorner.com/survey/">SURVEY</a></li> <li><a href="http://www.c-sharpcorner.com/exam/">CERTIFICATIONS</a></li> <li><a href="http://www.c-sharpcorner.com/downloads/">DOWNLOADS</a></li> </ul> <div class="rightlink"> <a href="http://www.cbeyond.net/" target="_blank"><span class="hosted">Hosted By </span>
+CBeyond Cloud Services</a></div> </div> </div> <div class="menuStripBlue"> <div class="page"> <div class="menu"> <ul> <li class="first"><a href="http://www.c-sharpcorner.com/photos/">PHOTOS</a></li> <li><a href="http://www.c-sharpcorner.com/code/">CODE SNIPPETS</a> </li> <li class="display_none"><a href="http://www.c-sharpcorner.com/consulting/">CONSULTING</a> </li> <li class="display_none"><a href="http://www.c-sharpcorner.com/training/">TRAINING</a> </li> <li><a href="http://www.c-sharpcorner.com/beginners/">STUDENTS</a> </li> <li><a href="http://www.c-sharpcorner.com/Members/">MEMBERS</a> </li> <li><a href="http://www.c-sharpcorner.com/media/ContactUs.aspx">MEDIA KIT</a></li> <li><a href="http://www.c-sharpcorner.com/resources/aboutus.aspx">ABOUT US</a></li> <li><a href="http://www.c-sharpcorner.com/resources/">LINKS</a></li> <li><a href="http://www.c-sharpcorner.com/ideas/">IDEAS</a> </li> </ul> </div> </div> </div> <div class="footerBottom"> <div class="page"> <ul> <li class="first"><a href="http://www.c-sharpcorner.com/contactus.aspx">CONTACT
+US</a></li> <li><a href="http://www.c-sharpcorner.com/privacypolicy.aspx">PRIVACY POLICY</a></li> <li><a href="http://www.c-sharpcorner.com/termsconditions.aspx">TERMS &amp;
+CONDITIONS</a></li> <li><a href="http://www.c-sharpcorner.com/sitemap/">SITEMAP</a></li> <li><a href="http://www.c-sharpcorner.com/contactus.aspx?Type=6">REPORT ABUSE</a></li> </ul> <div class="social_link"> <ul> <li><a target="_blank" href="http://www.facebook.com/pages/C-Corner/194086953935286" class="facebook">facebook</a></li> <li><a target="_blank" href="http://twitter.com/csharpcorner" class="twitter">twitter</a></li> <li><a target="_blank" href="https://plus.google.com/u/0/114221266846457741050/posts" class="google">google</a></li> <li><a target="_blank" href="http://www.youtube.com/user/CsharpCorner1/" class="media">
+media</a></li> </ul> <p class="copyright">
+©2015
+C# Corner. All contents are copyright of their authors.</p> </div> </div> </div> </div> <div class="responsive_footer"> <ul> <li class="first"><a href="http://www.c-sharpcorner.com/contactus.aspx">Contact
+Us</a></li> <li><a href="http://www.c-sharpcorner.com/privacypolicy.aspx">Privacy Policy</a></li> <li><a href="http://www.c-sharpcorner.com/termsconditions.aspx">Terms &amp;
+Conditions</a></li> <li><a href="http://www.c-sharpcorner.com/resources/aboutus.aspx">About Us</a></li> </ul> <p>
+©2015
+C# Corner. All contents are copyright of their authors.</p> </div> </div> <input type="hidden" name="ctl00$hiddenFieldNext" id="ctl00_hiddenFieldNext"> <input type="hidden" name="ctl00$hiddenFieldPrevious" id="ctl00_hiddenFieldPrevious"> <meta name="google-signin-clientid" content="1008907732563-jaf78g0pj7k52q8efh0r22c58iol91cg.apps.googleusercontent.com"> <meta name="google-signin-scope" content="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.profile.emails.read profile"> <meta name="google-signin-requestvisibleactions" content="http://schemas.google.com/AddActivity"> <meta name="google-signin-cookiepolicy" content="single_host_origin"> <script type="text/javascript">
+$j(window).load(function() {
+window.fbAsyncInit = function() {
+// init the FB JS SDK
+FB.init({
+appId: '440531902678919', // App ID from the App Dashboard
+xfbml: true,  // parse XFBML tags on this page?
+version: 'v2.3'
+});
+// Additional initialization code such as adding Event Listeners goes here
+};
+// Load the SDK's source Asynchronously
+(function(d, debug) {
+var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+if (d.getElementById(id)) { return; }
+js = d.createElement('script'); js.id = id; js.async = true;
+js.src = "//connect.facebook.net/en_US/sdk" + (debug ? "/debug" : "") + ".js";
+ref.parentNode.insertBefore(js, ref);
+} (document, /*debug*/false));
+(function() {
+var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+po.src = 'https://apis.google.com/js/client:plusone.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+(function(d, t) {
+var g = d.createElement(t),
+s = d.getElementsByTagName(t)[0];
+g.src = '//platform.twitter.com/widgets.js';
+s.parentNode.insertBefore(g, s);
+} (document, 'script'));
+(function(d, t) {
+var g = d.createElement(t),
+s = d.getElementsByTagName(t)[0];
+g.src = '//platform.linkedin.com/in.js';
+s.parentNode.insertBefore(g, s);
+} (document, 'script'));
+});
+</script> <div id="fb-root"> </div> <input type="hidden" name="ctl00$HiddenFieldCurrentPageUrl" id="ctl00_HiddenFieldCurrentPageUrl" value="http%3a%2f%2fgoo.gl%2fMLz5sE"> <div class="aspNetHidden"> <input type="hidden" name="__SCROLLPOSITIONX" id="__SCROLLPOSITIONX" value="0"> <input type="hidden" name="__SCROLLPOSITIONY" id="__SCROLLPOSITIONY" value="0"> <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdACks/dPNqw+vINSQ6l4iy2tJEy1huKVeY8kONobUPpk6sDF7OQsw1/Mtop6VtcNok2oRQ98qXvr6sagV4cmFLP1B6PLhrF1XPiPRw68DkEKipb/LOwudeeEwd1hcg9OGNvOyyBuqfxBdw1Ev/DzyLpr9O49lMNDKxhbbBljAhSzWovDOeobciiqGhs3akk0Ls770gNem3o29e/sNOlx3NldPA/51u4rxnl60OLkThaynZOC2bliYOrc3lugD6B2s8igLCG0rl8D4hSqjeof0YV+Vk/yKIgDd6t5885FLwTbcm/K0qQMgAIL7gt2A0hTtJmReVKNRPAEaGujCShiNAzF0hrN9VrpDcGUjumbk5NjEUQqSEuGe6huH3ffzludoyHOl5QWqeHaMKiL+Ia/OKqd37EiYMR7ouScDL9cg9AMtQ2nNYBOcyfCKicjm76gUBdQzzZ1RASFnNF81aUoSz1glCneo0HFnH//9+gqj7fIS6J869JtXG3w1HRwRcrSbVkvk2nUawfRuMBqLuYVKYEi4KtVoPyKDusBMObypr/vy2HAEt6OzLiy3jaA6OV+PAtSdZ9N8sdup2UM6bIjQjnRawQapXAgJjM47YyaPi25CWVbC/xUk8f6MVojedB9VEzz9DUa/O0vu4kLZlaMOgcdM/7vCcP/KP9SAtQsnVoHyhmGv/FmJRcCoIphU+M+LZbqPbiDPd8VNDejTDgLEVB3BSnQT4o94wF3WOlibaBYEad4++yhO1RP9FKOpi4eKC5UbcS87tpQDjli2gMZw4g89Uq2NamPzUqCyDc9kby67seqoT91fYC+znojsGu+Lw5UrPbYnuMjf1J4jOkEkkpfKr23DqXPa7q7ycN3isLgLDAnqSUpcWnkLaiCtXFA9w4aJo/Vm"> </div> <script type="text/javascript">
+//<![CDATA[
+theForm.oldSubmit = theForm.submit;
+theForm.submit = WebForm_SaveScrollPositionSubmit;
+theForm.oldOnSubmit = theForm.onsubmit;
+theForm.onsubmit = WebForm_SaveScrollPositionOnSubmit;
+//]]> </script> </form> <script type="text/javascript">
+(function(d, t) {
+var g = d.createElement(t),
+s = d.getElementsByTagName(t)[0];
+g.src = '/JQuery/jquery.TrendingNow_09032014.js';
+s.parentNode.insertBefore(g, s);
+} (document, 'script'));
+function Like() {
+$j.ajax({
+url: "/Handlers/CsharpCommon.ashx?method=like_content&type=Article",
+data: { article_id: 'e7582a5f-3e2a-4d82-8501-6156f98496d7' },
+type: "POST",
+async: false,
+success: function(response) {
+var label = $j('#ctl00_LabelLikeCount');
+if (response == "login")
+window.location = 'http://www.c-sharpcorner.com/UserRegistration/Logincheck.aspx?ReturnURL=/UploadFile/naresh.avari/develop-and-install-a-windows-service-in-C-Sharp/';
+else if (parseInt(response) == 1) {
+label.text(parseInt(label.text()) + 1);
+//                        label.css('color', 'green');
+}
+else {
+label.css('color', 'red');
+}
+}
+});
+}
+</script> <script type="text/javascript">
+$j(document).ready(function() {
+$j('a.show-dropdown').mouseover(function() {
+//get the height position of the current object
+var elementHeight = $j(this).height();
+var offsetWidth = 10;
+var offsetHeight = 10;
+//Get the tool tip container width adn height
+var toolTipWidth = $j("#dropDown").width();
+var toolTipHeight = $j("#dropDown").height();
+//Get the HTML document width and height
+var documentWidth = $j(document).width();
+var documentHeight = $j(document).height();
+//Set top and bottom position of the tool tip
+var top = $j(this).offset().top;
+if (top + toolTipHeight > documentHeight) {
+top = documentHeight - toolTipHeight - offsetHeight - (2 * elementHeight);
+}
+var left = $j(this).offset().left + offsetWidth;
+if (left + toolTipWidth > documentWidth) {
+left = documentWidth - toolTipWidth - (2 * offsetWidth);
+}
+$j('#dropDown').show();
+});
+$j('a.show-dropdown').mouseout(function() {
+$j("#dropDown").hide();
+});
+$j('#dropDown').mouseover(function() {
+$j('#dropDown').show();
+});
+$j('#dropDown').mouseout(function() {
+$j('#dropDown').hide();
+});
+});
+</script> <script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-535360-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>  <iframe name="oauth2relay433085758" id="oauth2relay433085758" src="./Develop and Install a Windows Service in C#_files/postmessageRelay.html" tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe></body></html>

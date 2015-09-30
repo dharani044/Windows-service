@@ -1,0 +1,97 @@
+Simple Service started 28/09/2015 02:15:58 PM
+Simple Service Mode: DAILY 28/09/2015 02:15:58 PM
+Simple Service scheduled to run after: 0 day(s) 0 hour(s) 1 minute(s) 1 seconds(s) 28/09/2015 02:15:58 PM
+Simple Service stopped 28/09/2015 02:19:09 PM
+Simple Service started 28/09/2015 02:19:31 PM
+Simple Service Mode: DAILY 28/09/2015 02:19:31 PM
+Simple Service scheduled to run after: 0 day(s) 0 hour(s) 0 minute(s) 28 seconds(s) 28/09/2015 02:19:31 PM
+Trying to send email to: dharani dharani1807@gmail.com
+Email sent successfully to: dharani dharani1807@gmail.com
+Simple Service Mode: DAILY 28/09/2015 02:20:03 PM
+Simple Service scheduled to run after: 0 day(s) 23 hour(s) 59 minute(s) 56 seconds(s) 28/09/2015 02:20:03 PM
+Simple Service stopped 28/09/2015 02:43:01 PM
+Simple Service started 28/09/2015 02:48:45 PM
+Simple Service Mode: DAILY 28/09/2015 02:48:45 PM
+Simple Service scheduled to run after: 0 day(s) 0 hour(s) 1 minute(s) 14 seconds(s) 28/09/2015 02:48:45 PM
+Trying to send email to: dharani dharani1807@gmail.com
+Simple Service Error on: 28/09/2015 02:50:00 PM ExecuteScalar requires an open and available Connection. The connection's current state is closed.   at System.Data.SqlClient.SqlCommand.ValidateCommand(String method, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at sampleservice.Service1.SchedularCallback(Object e) in c:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\Service1.cs:line 137
+Simple Service started 28/09/2015 02:51:31 PM
+Simple Service Mode: DAILY 28/09/2015 02:51:31 PM
+Simple Service scheduled to run after: 0 day(s) 0 hour(s) 0 minute(s) 28 seconds(s) 28/09/2015 02:51:31 PM
+Trying to send email to: dharani dharani1807@gmail.com
+Simple Service Error on: 28/09/2015 02:52:00 PM Specified cast is not valid.   at sampleservice.Service1.SchedularCallback(Object e) in c:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\Service1.cs:line 138
+Simple Service started 28/09/2015 02:53:40 PM
+Simple Service Mode: DAILY 28/09/2015 02:53:40 PM
+Simple Service scheduled to run after: 0 day(s) 23 hour(s) 58 minute(s) 19 seconds(s) 28/09/2015 02:53:40 PM
+Simple Service stopped 28/09/2015 02:53:49 PM
+Simple Service started 28/09/2015 02:54:08 PM
+Simple Service Mode: DAILY 28/09/2015 02:54:08 PM
+Simple Service scheduled to run after: 0 day(s) 0 hour(s) 0 minute(s) 51 seconds(s) 28/09/2015 02:54:08 PM
+Trying to send email to: dharani dharani1807@gmail.com
+Email sent successfully to: dharani dharani1807@gmail.com
+Simple Service Mode: DAILY 28/09/2015 02:55:03 PM
+Simple Service scheduled to run after: 0 day(s) 23 hour(s) 59 minute(s) 56 seconds(s) 28/09/2015 02:55:03 PM
+Simple Service stopped 28/09/2015 02:55:20 PM
+Simple Service started 28/09/2015 02:55:45 PM
+Simple Service Mode: DAILY 28/09/2015 02:55:45 PM
+Simple Service scheduled to run after: 0 day(s) 23 hour(s) 59 minute(s) 14 seconds(s) 28/09/2015 02:55:45 PM
+Simple Service stopped 28/09/2015 02:56:18 PM
+Simple Service started 28/09/2015 02:56:28 PM
+Simple Service Mode: DAILY 28/09/2015 02:56:28 PM
+Simple Service scheduled to run after: 0 day(s) 23 hour(s) 58 minute(s) 31 seconds(s) 28/09/2015 02:56:28 PM
+Simple Service stopped 28/09/2015 02:57:19 PM
+Simple Service started 28/09/2015 02:57:34 PM
+Simple Service Mode: DAILY 28/09/2015 02:57:34 PM
+Simple Service scheduled to run after: 0 day(s) 23 hour(s) 2 minute(s) 25 seconds(s) 28/09/2015 02:57:34 PM
+Simple Service stopped 28/09/2015 02:58:02 PM
+Simple Service started 28/09/2015 02:58:17 PM
+Simple Service Mode: DAILY 28/09/2015 02:58:17 PM
+Simple Service scheduled to run after: 0 day(s) 11 hour(s) 1 minute(s) 42 seconds(s) 28/09/2015 02:58:17 PM
+Simple Service stopped 28/09/2015 02:58:35 PM
+Simple Service started 28/09/2015 02:58:51 PM
+Simple Service Mode: DAILY 28/09/2015 02:58:51 PM
+Simple Service scheduled to run after: 0 day(s) 1 hour(s) 1 minute(s) 8 seconds(s) 28/09/2015 02:58:51 PM
+Simple Service stopped 28/09/2015 02:59:01 PM
+Simple Service started 28/09/2015 02:59:18 PM
+Simple Service Mode: DAILY 28/09/2015 02:59:18 PM
+Simple Service scheduled to run after: 0 day(s) 0 hour(s) 0 minute(s) 41 seconds(s) 28/09/2015 02:59:18 PM
+Trying to send email to: dharani dharani1807@gmail.com
+Email sent successfully to: dharani dharani1807@gmail.com
+Simple Service Mode: DAILY 28/09/2015 03:00:03 PM
+Simple Service scheduled to run after: 0 day(s) 23 hour(s) 59 minute(s) 56 seconds(s) 28/09/2015 03:00:03 PM
+Simple Service stopped 28/09/2015 03:02:15 PM
+Simple Service started 28/09/2015 03:02:27 PM
+Simple Service Mode: DAILY 28/09/2015 03:02:27 PM
+Simple Service scheduled to run after: 0 day(s) 0 hour(s) 0 minute(s) 32 seconds(s) 28/09/2015 03:02:27 PM
+Trying to send email to: dharani dharani1807@gmail.com
+Email sent successfully to: dharani dharani1807@gmail.com
+Simple Service Mode: DAILY 28/09/2015 03:03:03 PM
+Simple Service scheduled to run after: 0 day(s) 23 hour(s) 59 minute(s) 56 seconds(s) 28/09/2015 03:03:03 PM
+Simple Service stopped 28/09/2015 03:04:41 PM
+Simple Service started 28/09/2015 03:04:55 PM
+Simple Service Mode: DAILY 28/09/2015 03:04:55 PM
+Simple Service scheduled to run after: 0 day(s) 0 hour(s) 0 minute(s) 4 seconds(s) 28/09/2015 03:04:55 PM
+Trying to send email to: dharani dharani1807@gmail.com
+Email sent successfully to: dharani dharani1807@gmail.com
+Simple Service Mode: DAILY 28/09/2015 03:05:03 PM
+Simple Service scheduled to run after: 0 day(s) 23 hour(s) 59 minute(s) 56 seconds(s) 28/09/2015 03:05:03 PM
+Simple Service stopped 28/09/2015 03:05:33 PM
+Simple Service started 28/09/2015 03:05:47 PM
+Simple Service Mode: DAILY 28/09/2015 03:05:47 PM
+Simple Service scheduled to run after: 0 day(s) 0 hour(s) 1 minute(s) 12 seconds(s) 28/09/2015 03:05:47 PM
+Trying to send email to: dharani dharani1807@gmail.com
+Email sent successfully to: dharani dharani1807@gmail.com
+Simple Service Mode: DAILY 28/09/2015 03:07:03 PM
+Simple Service scheduled to run after: 0 day(s) 23 hour(s) 59 minute(s) 56 seconds(s) 28/09/2015 03:07:03 PM
+Simple Service started 29/09/2015 11:13:16 AM
+Simple Service Mode: DAILY 29/09/2015 11:13:17 AM
+Simple Service scheduled to run after: 0 day(s) 3 hour(s) 53 minute(s) 42 seconds(s) 29/09/2015 11:13:17 AM
+Simple Service Mode: DAILY 29/09/2015 03:07:00 PM
+Simple Service scheduled to run after: 0 day(s) 23 hour(s) 59 minute(s) 59 seconds(s) 29/09/2015 03:07:00 PM
+Simple Service started 30/09/2015 11:09:06 AM
+Simple Service Mode: DAILY 30/09/2015 11:09:08 AM
+Simple Service scheduled to run after: 0 day(s) 3 hour(s) 57 minute(s) 51 seconds(s) 30/09/2015 11:09:08 AM

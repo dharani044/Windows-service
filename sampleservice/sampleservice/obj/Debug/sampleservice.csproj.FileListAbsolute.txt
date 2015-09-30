@@ -1,0 +1,7 @@
+C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe.config
+C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.exe
+C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\bin\Debug\sampleservice.pdb
+C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\obj\Debug\sampleservice.ProjectInstaller.resources
+C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\obj\Debug\sampleservice.csproj.GenerateResource.Cache
+C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\obj\Debug\sampleservice.exe
+C:\Users\User\Documents\Visual Studio 2012\c# simple programs\sampleservice\sampleservice\obj\Debug\sampleservice.pdb

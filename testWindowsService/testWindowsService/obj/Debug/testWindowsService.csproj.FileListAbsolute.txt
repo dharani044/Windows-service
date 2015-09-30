@@ -1,0 +1,7 @@
+C:\Users\User\Documents\Visual Studio 2012\c# simple programs\testWindowsService\testWindowsService\bin\Debug\testWindowsService.exe.config
+C:\Users\User\Documents\Visual Studio 2012\c# simple programs\testWindowsService\testWindowsService\obj\Debug\testWindowsService.ProjectInstaller.resources
+C:\Users\User\Documents\Visual Studio 2012\c# simple programs\testWindowsService\testWindowsService\obj\Debug\testWindowsService.csproj.GenerateResource.Cache
+C:\Users\User\Documents\Visual Studio 2012\c# simple programs\testWindowsService\testWindowsService\bin\Debug\testWindowsService.exe
+C:\Users\User\Documents\Visual Studio 2012\c# simple programs\testWindowsService\testWindowsService\bin\Debug\testWindowsService.pdb
+C:\Users\User\Documents\Visual Studio 2012\c# simple programs\testWindowsService\testWindowsService\obj\Debug\testWindowsService.exe
+C:\Users\User\Documents\Visual Studio 2012\c# simple programs\testWindowsService\testWindowsService\obj\Debug\testWindowsService.pdb
